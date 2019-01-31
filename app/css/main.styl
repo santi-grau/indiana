@@ -1,0 +1,77 @@
+@font-face
+    font-family dia
+    src url('../assets/dia-regular.ttf')
+
+@font-face
+    font-family indiana
+    src url('../assets/IndianaBETA.otf')
+
+html
+    height 100%
+    padding 0
+    margin 0
+body
+    min-height 100%
+    padding 0
+    margin 0
+    font-family dia
+
+#wrapper
+    z-index 0
+    .section
+        position relative
+        width 100%
+        min-height 100vh
+        &#home
+            background #8bc0d6
+        &#about
+            background #ffffff
+        &#modularSystems
+            background #feee00
+        &#footer
+            color #ffffff
+            min-height auto
+            background #000000
+
+#home
+    #header
+        position relative
+        top 20px
+        #title
+            width 501px
+            height 120px
+            background url('../assets/logo.svg') 100% 100% no-repeat
+            background-position center center
+            background-size contain
+            margin 0px auto
+        #share
+            position absolute
+            top 0px
+            right 20px
+            .sharebut
+                width 23px
+                height 23px
+                margin-bottom 10px
+                &.instagram
+                    background url('../assets/ig.svg') 100% 100% no-repeat
+                &.facebook
+                    background url('../assets/fb.svg') 100% 100% no-repeat
+    
+#about
+    text-align center
+    font-family indiana
+    font-size 140px
+    line-height 136px
+    .inner
+        .body
+            width 80%
+            margin 100px auto
+#menu
+    width 300px
+    margin 0
+    padding 0
+    position fixed
+    top 20px
+    left 20px
+    z-index 1
+    list-style-type none

@@ -1,0 +1,19 @@
+{
+  "name": "simulator",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel app/views/index.pug --no-hmr",
+    "build": "rm -rf docs && parcel build app/views/index.pug --out-dir docs"
+  },
+  "keywords": [],
+  "author": "proper-code",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel-bundler": "*",
+    "pug": "*",
+    "stylus": "*"
+  },
+  "dependencies": {}
+}
