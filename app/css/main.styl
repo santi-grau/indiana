@@ -4,7 +4,12 @@
 
 @font-face
     font-family indiana
-    src url('../assets/IndianaBETA.otf')
+    src url('../assets/indiana.otf')
+
+yellowColor = #feee00
+blueColor = #8bc0d6
+greenColor = #4a8e55
+redColor = #c6492e
 
 html
     height 100%
@@ -23,11 +28,11 @@ body
         width 100%
         min-height 100vh
         &#home
-            background #8bc0d6
+            background blueColor
         &#about
             background #ffffff
         &#modularSystems
-            background #feee00
+            background yellowColor
         &#footer
             color #ffffff
             min-height auto
@@ -38,8 +43,8 @@ body
         position relative
         top 20px
         #title
-            width 501px
-            height 120px
+            width 480px
+            height 115px
             background url('../assets/logo.svg') 100% 100% no-repeat
             background-position center center
             background-size contain
@@ -49,9 +54,11 @@ body
             top 0px
             right 20px
             .sharebut
-                width 23px
-                height 23px
+                width 20px
+                height 20px
                 margin-bottom 10px
+                background-position center center
+                background-size contain
                 &.instagram
                     background url('../assets/ig.svg') 100% 100% no-repeat
                 &.facebook
@@ -60,18 +67,198 @@ body
 #about
     text-align center
     font-family indiana
-    font-size 140px
-    line-height 136px
+    font-size 127px
+    line-height 120px
+    letter-spacing -5px
     .inner
         .body
-            width 80%
+            width 1490px
             margin 100px auto
+            .greenColor
+                color greenColor
+            .blueColor
+                color blueColor
+            .redColor
+                color redColor
+
+#modularSystems
+    position relative
+    .inner
+        margin 0 auto
+        width 1490px
+        position absolute
+        top 50%
+        left 50%
+        transform translate3d( -745px, -50%, 0 )
+        .title
+            text-align center
+            font-size 36px
+            margin-bottom 50px
+        .body
+            float left
+            font-size 33px
+            line-height 35px
+            width 725px
+            p
+                margin-top 0
+        .image
+            width 725px
+            float right
+            height 450px
+            background url('../assets/modularSystems.jpg') center center
+            background-size cover
+
+#footer
+    .inner
+        width 1490px
+        font-size 30px
+        margin 0 auto
+        padding 90px 0
+        .col
+            float left
+            &.information
+                margin-right 60px
+            .topLevel
+                margin-bottom 30px
+            ul
+                margin 0
+                padding 0
+                list-style-type none
+                li
+                    a
+                        text-decoration none
+                        color #ffffff
+                        &:hover
+                            text-decoration underline
+            &.newsletter
+                float right
+                width 533px
+                .topLevel
+                    margin-bottom 10px
+                .inputField
+                    input
+                        height 40px
+                        padding 6px 0px 6px 9px
+                        width calc( 100% - 22px )
+                        background none
+                        border solid 1px
+                        color #ffffff
+                        margin-bottom 14px
+                        font-size 30px
+                        &::placeholder
+                            color #ffffff
+                        &:focus
+                            outline none
+                            background #222222
+                #terms
+                    .checkbox
+                        float left
+                        width 40px
+                        height 40px
+                        border solid 1px #ffffff
+                        margin-right 14px
+                        cursor pointer
+                        position relative
+                        &:hover
+                            background #222222
+                        &.active
+                            .line
+                                display block
+                        .line
+                            display none
+                            width 60px
+                            height 0px
+                            border-bottom 1px solid #ffffff
+                            transform rotate(45deg)
+                            transform-origin 0 0
+                            position absolute
+                            top 0
+                            left 0
+                            &.line2
+                                transform rotate(-45deg)
+                                transform-origin 0 0
+                                // transform-origin 100% 0
+                                top 40px
+                                left -1px
+                    .terms
+                        position relative
+                        top 5px
+                .sendBut
+                    width calc( 100% - 22px )
+                    border solid 1px #ffffff
+                    background #ffffff
+                    color #000000
+                    text-align center
+                    margin-top 20px
+                    padding 6px 0px 6px 9px
+                    cursor pointer
+                    &:hover
+                        background #000000
+                        color #ffffff
+                        animation blinker 0.4s linear infinite
+
 #menu
-    width 300px
-    margin 0
-    padding 0
+    font-size 14px
+    width 100%
+    height 100%
+    pointer-events none
     position fixed
-    top 20px
-    left 20px
+    top 0px
+    left 0px
     z-index 1
-    list-style-type none
+    &.modularsystems
+        background blueColor
+        color greenColor
+    &.aboutus
+        background blueColor
+        color yellowColor
+    .pattern
+        width 100%
+        height 100%
+        font-family indiana
+        font-size 64px
+        line-height 55px
+        position fixed
+        z-index 0
+        transform rotate(-8deg)
+        .inner
+            .line
+                position relative
+                width 10000px
+    #buts
+        position relative
+        z-index 1
+        list-style-type none
+        margin 0
+        padding 0
+        margin-top 20px
+        margin-left 20px
+        li
+            a
+                color #000000
+                font-size 20px
+                text-decoration none
+                pointer-events auto
+
+.clearfix
+    overflow auto
+
+.clearfix::after
+    content ""
+    clear both
+    display table
+
+
+@keyframes blinker
+    0%
+        background #ffffff
+        color #000000
+    49%
+        background #ffffff
+        color #000000
+    50%
+        background #000000
+        color #ffffff
+    100%
+        background #000000
+        color #ffffff

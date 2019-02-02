@@ -21,48 +21,59 @@ html
       .section#about
         .inner
           .body
-            | INDIANA EVOLVING #[br]
-            | FURNITURE Is a #[span(style='color: #4a8e55') MODULAR ] #[br]
-            | #[span(style='color: #4a8e55') SYSTEM ] LOREM IPSUM #[br]
-            | All SPACes #[span(style='color: #8bc0d6') LIVInG ROOM ] #[br]
-            | #[span(style='color: #c6492e') BedROOM ] #[span(style='color: #4a8e55') OffICE ] #[br]
-            | AND #[span(style='color: #8bc0d6') RETAIL PURPOSES ] #[br]
-            | LEARN HOW TO MAKE #[br]
-            | YOUR OWN INDIANA #[br]
-            | WITH OUR #[span(style='color: #c6492e') SIMULaTOR ]
+            | INDIANA EVOLVING
+            | FURNITURE Is a #[span.greenColor MODULAR ]
+            | #[span.greenColor SYSTEM ] LOREM IPSUM
+            | All SPACes #[span.blueColor LIVInG ROOM ]
+            | #[span.redColor BedROOM ] #[span.greenColor OffICE ]
+            | AND #[span.blueColor RETAIL PURPOSES ]
+            | LEARN HOW TO MAKE
+            | YOUR OWN INDIANA
+            | WITH OUR #[span.redColor SIMULaTOR ]
       .section#modularSystems
         .inner
           .title Modular System
           .body
-            | Modular System mus eventio enimodiones nimus volo milles ipsam nonseque sitatur molectem id eumquodi si dolorest, 
-            | namendis eveniet quam, occatem quacium facescide nis aut ipit, untia simen ssimpe ribus. tusciist, eatempore velestinti omnimpelles dolorecus.
-            | Quis denistr uptaercium facescide nis aut ipit, untia simen ssimpe ribus. Tatus estiandam, nonsequis molorio. Omnihici oditiant as debis 
-            | est acepre offictestia. Acium facescide nis aut ipit, untia simen ssimpe ribus. tusciist, eatempore velestinti omniorulorest.
+            p
+              | Modular System mus eventio enimodiones nimus volo milles ipsam nonseque sitatur molectem id eumquodi si dolorest, 
+              | namendis eveniet quam, occatem quacium facescide nis aut ipit, untia simen ssimpe ribus. tusciist, eatempore velestinti omnimpelles dolorecus.
+            p
+              | Quis denistr uptaercium facescide nis aut ipit, untia simen ssimpe ribus. Tatus estiandam, nonsequis molorio. Omnihici oditiant as debis 
+              | est acepre offictestia. Acium facescide nis aut ipit, untia simen ssimpe ribus. tusciist, eatempore velestinti omniorulorest.
           .image
       .section#footer
-        .inner
-          .col
+        .inner.clearfix
+          .col.information
             .topLevel INFORMATION
             ul
-              li About Us
-              li Press Enquiries
-              li Privacy Policy
-              li Terms &amp; Conditions
-              li Cookies
-          .col
+              li #[a.but( href = 'javascript:void(0)' ) About Us]
+              li #[a.but( href = 'javascript:void(0)' ) Press Enquiries]
+              li #[a.but( href = 'javascript:void(0)' ) Privacy Policy]
+              li #[a.but( href = 'javascript:void(0)' ) Terms <br/>&amp; Conditions]
+              li #[a.but( href = 'javascript:void(0)' ) Cookies]
+          .col.follow
             .topLevel FOLLOW US
             ul
-              li Instagram
-              li Facebook
+              li #[a.but( href = 'javascript:void(0)' ) Instagram]
+              li #[a.but( href = 'javascript:void(0)' ) Facebook]
           .col.newsletter
             .topLevel SIGN UP FOR OUR NEWSLETTER
-            input( type = "text", placeholder = "Name and Surname" )
-            input( type = "text", placeholder = "Business" )
-            input( type = "text", placeholder = "Email" )
-            span.checkbox 
-            span.terms I accept terms and conditions
-            .sendBut
-    ul#menu
-      li Modular System
-      li About us
+            .inputField
+              input( type = "text", placeholder = "Name and Surname" )
+            .inputField
+              input( type = "text", placeholder = "Business" )
+            .inputField
+              input( type = "text", placeholder = "Email" )
+            #terms.clearfix
+              span.checkbox 
+                .line.line1
+                .line.line2
+              span.terms I accept terms and conditions
+            .sendBut SEND
+    #menu
+      .pattern
+        .inner
+      ul#buts
+        li #[a.but( href = 'javascript:void(0)', data-item = 'modularsystems' ) Modular System]
+        li #[a.but( href = 'javascript:void(0)', data-item = 'aboutus' ) About us]
     script(src='../js/main.js')
