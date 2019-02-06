@@ -17,18 +17,19 @@ html
     margin 0
 body
     min-height 100%
+    height 100%
     padding 0
     margin 0
     font-family dia
 
 #wrapper
     z-index 0
+    height 100%
     .section
         position relative
-        width 100%
-        min-height 100vh
         &#home
             background blueColor
+            height 100%
         &#about
             background #ffffff
         &#modularSystems
@@ -39,6 +40,12 @@ body
             background #000000
 
 #home
+    #three
+        position absolute
+        top 0
+        left 0
+        width 100%
+        height 100%
     #header
         position relative
         top 20px
@@ -84,12 +91,9 @@ body
 #modularSystems
     position relative
     .inner
+        padding 60px 0
         margin 0 auto
         width 1490px
-        position absolute
-        top 50%
-        left 50%
-        transform translate3d( -745px, -50%, 0 )
         .title
             text-align center
             font-size 36px
@@ -195,7 +199,7 @@ body
                     &:hover
                         background #000000
                         color #ffffff
-                        animation blinker 0.4s linear infinite
+                        animation blinkBut 0.4s linear infinite
 
 #menu
     font-size 14px
@@ -240,6 +244,40 @@ body
                 text-decoration none
                 pointer-events auto
 
+#modal
+    z-index 2
+    position fixed
+    opacity 0
+    top 100%
+    left 0
+    width 100%
+    height 100%
+    background rgba( 255, 255, 255, 0.9 )
+    &.active
+        opacity 1
+        top 0
+    .close
+        position absolute
+        right 30px
+        top 30px
+        width 30px
+        height 30px
+        background url('../assets/close.svg') 100% 100% no-repeat
+        background-position center center
+        background-size contain
+        cursor pointer
+        &:hover
+            animation blinker 0.4s linear infinite
+    .inner
+        padding 30px
+        width 50%
+        margin 0 auto
+        .title
+            font-size 24px
+            text-align center
+        .content
+            font-size 14px
+
 .clearfix
     overflow auto
 
@@ -249,7 +287,7 @@ body
     display table
 
 
-@keyframes blinker
+@keyframes blinkBut
     0%
         background #ffffff
         color #000000
@@ -262,3 +300,208 @@ body
     100%
         background #000000
         color #ffffff
+
+@keyframes blinker
+    0%
+        opacity 1
+    49%
+        opacity 0
+    50%
+        opacity 1
+    100%
+        opacity 0
+
+
+@media only screen and (max-width: 768px)
+    #home
+        #header
+            #title
+                width 240px
+                height 47px
+            #share
+                position absolute
+                top 0px
+                right 20px
+                .sharebut
+                    width 16px
+                    height 16px
+                    margin-bottom 8px
+    #about
+        font-size 42px
+        line-height 38px
+        letter-spacing -3px
+        .inner
+            .body
+                width 80%
+    
+    #modularSystems
+        .inner
+            width 80%
+            position relative
+            transform none
+            left 0
+            top 0
+            .title
+                font-size 17px
+                margin-bottom 34px
+                
+            .body
+                float none
+                font-size 14px
+                line-height 14px
+                width 100%
+                p
+                    margin-top 20px 
+            .image
+                float none
+                width 100%
+                height 50vw
+
+    
+    #footer
+        .inner
+            width 80%
+            font-size 14px
+            padding 50px 0
+            .col
+                // float left
+                // &.information
+                //     margin-right 60px
+                .topLevel
+                    margin-bottom 9px
+                // ul
+                //     margin 0
+                //     padding 0
+                &.newsletter
+                    clear both
+                    float none
+                    width 100%
+                    padding-top 30px
+                    .topLevel
+                        margin-bottom 11px
+                    .inputField
+                        input
+                            height 30px
+                            padding 1px 0px 1px 7px
+                            font-size 14px
+                    #terms
+                        .checkbox
+                            width 30px
+                            height 30px
+                            margin-right 7px
+                            .line
+                                width 60px
+                                top 0
+                                left 0
+                                &.line2
+                                    top 40px
+                                    left -1px
+                        .terms
+                            top 8px
+                    .sendBut
+                        width calc( 100% - 22px )
+                        margin-top 20px
+                        padding 6px 0px 6px 9px
+
+@media only screen and (min-width: 768px) and (max-width: 1280px)
+    #about
+        font-size 86px
+        line-height 81px
+        letter-spacing -3px
+        .inner
+            .body
+                width 722px
+    #modularSystems
+        .inner
+            width 722px
+            .title
+                font-size 21px
+                margin-bottom 34px
+            .body
+                font-size 18px
+                line-height 18px
+                width 341px
+                p
+                    margin-top 0
+            .image
+                width 341px
+                height 250px
+
+    #footer
+        .inner
+            width 722px
+            font-size 18px
+            .col
+                float left
+                &.information
+                    margin-right 60px
+                &.newsletter
+                    width 340px
+                    .topLevel
+                        margin-bottom 10px
+                    .inputField
+                        input
+                            font-size 18px
+                            padding 1px 0px 1px 9px
+                    #terms
+                        .terms
+                            top 7px
+
+@media only screen and (min-width: 768px) and (max-width: 1600px)
+    #home
+        #header
+            #title
+                width 360px
+                height 86px
+            #share
+                position absolute
+                top 0px
+                right 20px
+                .sharebut
+                    width 16px
+                    height 16px
+                    margin-bottom 8px
+
+
+@media only screen and (min-width: 1280px) and (max-width: 1600px)
+    #about
+        font-size 96px
+        line-height 90px
+        letter-spacing -3px
+        .inner
+            .body
+                width 1106px
+
+    #modularSystems
+        .inner
+            width 1106px
+            .title
+                font-size 27px
+                margin-bottom 34px
+            .body
+                font-size 25px
+                line-height 26px
+                width 533px
+                p
+                    margin-top 0
+            .image
+                width 533px
+                height 340px
+    
+    #footer
+        .inner
+            width 1106px
+            font-size 23px
+            .col
+                float left
+                &.information
+                    margin-right 60px
+                &.newsletter
+                    .topLevel
+                        margin-bottom 10px
+                    .inputField
+                        input
+                            font-size 23px
+                    #terms
+                        .terms
+                            top 7px

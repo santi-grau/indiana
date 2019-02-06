@@ -9,8 +9,9 @@ html
     link(rel='stylesheet', id='mainStylesheet' href='../css/main.styl')
   body
     #wrapper
-      .section#home
+      #home.section
         .inner
+          #three
           #header
             #title
             #share
@@ -18,7 +19,7 @@ html
               .sharebut.facebook
           #threeLayer
         
-      .section#about
+      #about.section
         .inner
           .body
             | INDIANA EVOLVING
@@ -30,9 +31,10 @@ html
             | LEARN HOW TO MAKE
             | YOUR OWN INDIANA
             | WITH OUR #[span.redColor SIMULaTOR ]
-      .section#modularSystems
-        .inner
+      #modularSystems.section
+        .inner.clearfix
           .title Modular System
+          .image
           .body
             p
               | Modular System mus eventio enimodiones nimus volo milles ipsam nonseque sitatur molectem id eumquodi si dolorest, 
@@ -40,22 +42,21 @@ html
             p
               | Quis denistr uptaercium facescide nis aut ipit, untia simen ssimpe ribus. Tatus estiandam, nonsequis molorio. Omnihici oditiant as debis 
               | est acepre offictestia. Acium facescide nis aut ipit, untia simen ssimpe ribus. tusciist, eatempore velestinti omniorulorest.
-          .image
-      .section#footer
+      #footer.section
         .inner.clearfix
           .col.information
             .topLevel INFORMATION
             ul
-              li #[a.but( href = 'javascript:void(0)' ) About Us]
-              li #[a.but( href = 'javascript:void(0)' ) Press Enquiries]
-              li #[a.but( href = 'javascript:void(0)' ) Privacy Policy]
-              li #[a.but( href = 'javascript:void(0)' ) Terms <br/>&amp; Conditions]
-              li #[a.but( href = 'javascript:void(0)' ) Cookies]
+              li #[a.but.info( href = 'javascript:void(0)', data-target = 'about' ) About Us]
+              li #[a.but.info( href = 'javascript:void(0)', data-target = 'press' ) Press Enquiries]
+              li #[a.but.info( href = 'javascript:void(0)', data-target = 'privacy' ) Privacy Policy]
+              li #[a.but.info( href = 'javascript:void(0)', data-target = 'terms' ) Terms <br/>&amp; Conditions]
+              li #[a.but.info( href = 'javascript:void(0)', data-target = 'cookies' ) Cookies]
           .col.follow
             .topLevel FOLLOW US
             ul
-              li #[a.but( href = 'javascript:void(0)' ) Instagram]
-              li #[a.but( href = 'javascript:void(0)' ) Facebook]
+              li #[a.but.follow( href = 'javascript:void(0)', data-target = 'ig' ) Instagram]
+              li #[a.but.follow( href = 'javascript:void(0)', data-target = 'fb' ) Facebook]
           .col.newsletter
             .topLevel SIGN UP FOR OUR NEWSLETTER
             .inputField
@@ -74,6 +75,15 @@ html
       .pattern
         .inner
       ul#buts
-        li #[a.but( href = 'javascript:void(0)', data-item = 'modularsystems' ) Modular System]
-        li #[a.but( href = 'javascript:void(0)', data-item = 'aboutus' ) About us]
-    script(src='../js/main.js')
+        li #[a.but( href = '#modularSystems', data-item = 'modularsystems' ) Modular System]
+        li #[a.but( href = '#about', data-item = 'aboutus' ) About us]
+    #modal
+      .close
+      .inner
+        .title Title of the modal
+        .content
+          p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ex purus, bibendum non dolor sed, dapibus pulvinar magna. Fusce magna mi, egestas dapibus pharetra vel, vehicula ut nisl. Nam in est ante. Proin pretium risus non justo consequat, eget iaculis nulla dictum. Aenean suscipit tincidunt ipsum vitae volutpat. Pellentesque cursus augue vitae diam vehicula interdum. Duis scelerisque ipsum a ex luctus, sit amet efficitur leo molestie. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque volutpat diam sit amet turpis faucibus sollicitudin. Morbi bibendum nunc sit amet lectus faucibus, vitae bibendum nisl sagittis. Nam lacinia mollis ante a ultricies. Nunc et ullamcorper mi. Sed luctus purus ut magna ultricies interdum. Phasellus nisi augue, vestibulum a tellus quis, vehicula rhoncus felis. Sed dictum, lorem et porta congue, orci risus tempus tellus, vel congue orci est non felis.
+          p Vivamus aliquet, dolor et viverra pulvinar, est mauris pretium lorem, eget ullamcorper nulla mi et neque. Cras sem est, facilisis sit amet neque sit amet, commodo pulvinar ipsum. Vivamus at tempor nisl. Donec nunc libero, feugiat sit amet vulputate et, pulvinar eget tellus. Morbi ipsum nibh, volutpat et faucibus vel, mollis non magna. Aliquam quis massa volutpat, luctus odio id, finibus lacus. Ut pharetra et turpis vel imperdiet. In ultricies ullamcorper nisi, et convallis dui. Ut vitae elit et sapien lacinia placerat ut eu mi. Mauris mauris eros, condimentum nec tristique eu, varius nec eros. Vestibulum a lacus et ipsum elementum tincidunt. Nunc varius nulla quis mauris consequat ornare. Morbi molestie sapien iaculis, scelerisque quam et, convallis sem. Vestibulum sodales, lorem sed lobortis interdum, arcu velit porttitor tortor, ut elementum augue augue malesuada augue. Aliquam blandit lectus tellus, ac condimentum metus consequat sit amet. Donec at egestas velit.
+
+    //- script( src = 'https://apis.google.com/js/api.js' )
+    script( src = '../js/main.js' )

@@ -3,11 +3,11 @@ class Menu {
         this.node = node
         this.pattern = this.node.getElementsByClassName( 'pattern' )[ 0 ]
         this.inner = this.node.getElementsByClassName( 'inner' )[ 0 ]
-
+        this.moveSpeed = 3
         Array.from( this.node.getElementsByClassName( 'but' ) ).forEach( e => {
             e.addEventListener( 'mouseenter', this.mouseEnter.bind( this ) )
             e.addEventListener( 'mouseleave', this.mouseLeave.bind( this ) )
-        });
+        })
         
         this.hoverActive = false
 	}
@@ -47,7 +47,7 @@ class Menu {
     }
 
     mouseLeave( e ){
-        if( !this.mouseOutTimer ) this.mouseOutTimer = setTimeout( this.mouseOut.bind( this ), 200 )
+        if( !this.mouseOutTimer ) this.mouseOutTimer = setTimeout( this.mouseOut.bind( this ), 100 )
     }
 
     mouseOut( ){
@@ -59,7 +59,7 @@ class Menu {
 	step( time ){
         if( !this.hoverActive ) return
         this.lines.forEach( l => {
-            l.p += l.s * 2
+            l.p += l.s * this.moveSpeed
             if( Math.abs( l.p ) >= l.w ) l.p = 0
             l.el.style.transform = 'translate3d( ' + l.p + 'px, 0px, 0px )'
         });
