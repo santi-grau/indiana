@@ -12,11 +12,6 @@ html
       #home.section
         .inner
           #three
-          #header
-            #title
-            #share
-              .sharebut.instagram
-              .sharebut.facebook
           #threeLayer
         
       #about.section
@@ -60,17 +55,22 @@ html
           .col.newsletter
             .topLevel SIGN UP FOR OUR NEWSLETTER
             .inputField
-              input( type = "text", placeholder = "Name and Surname" )
+              input( type = 'text', placeholder = 'Name and Surname' )
             .inputField
-              input( type = "text", placeholder = "Business" )
+              input( type = 'text', placeholder = 'Business' )
             .inputField
-              input( type = "text", placeholder = "Email" )
+              input( type = 'text', placeholder = 'Email' )
             #terms.clearfix
               span.checkbox 
                 .line.line1
                 .line.line2
-              span.terms I accept terms and conditions
+              span.terms I accept #[a(href='javascript:void(0)') terms and conditions ]
             .sendBut SEND
+    #header.active
+      #title
+      #share
+        .sharebut.instagram
+        .sharebut.facebook
     #menu
       .pattern
         .inner
@@ -82,8 +82,8 @@ html
       .inner
         .title Title of the modal
         .content
-          p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ex purus, bibendum non dolor sed, dapibus pulvinar magna. Fusce magna mi, egestas dapibus pharetra vel, vehicula ut nisl. Nam in est ante. Proin pretium risus non justo consequat, eget iaculis nulla dictum. Aenean suscipit tincidunt ipsum vitae volutpat. Pellentesque cursus augue vitae diam vehicula interdum. Duis scelerisque ipsum a ex luctus, sit amet efficitur leo molestie. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque volutpat diam sit amet turpis faucibus sollicitudin. Morbi bibendum nunc sit amet lectus faucibus, vitae bibendum nisl sagittis. Nam lacinia mollis ante a ultricies. Nunc et ullamcorper mi. Sed luctus purus ut magna ultricies interdum. Phasellus nisi augue, vestibulum a tellus quis, vehicula rhoncus felis. Sed dictum, lorem et porta congue, orci risus tempus tellus, vel congue orci est non felis.
-          p Vivamus aliquet, dolor et viverra pulvinar, est mauris pretium lorem, eget ullamcorper nulla mi et neque. Cras sem est, facilisis sit amet neque sit amet, commodo pulvinar ipsum. Vivamus at tempor nisl. Donec nunc libero, feugiat sit amet vulputate et, pulvinar eget tellus. Morbi ipsum nibh, volutpat et faucibus vel, mollis non magna. Aliquam quis massa volutpat, luctus odio id, finibus lacus. Ut pharetra et turpis vel imperdiet. In ultricies ullamcorper nisi, et convallis dui. Ut vitae elit et sapien lacinia placerat ut eu mi. Mauris mauris eros, condimentum nec tristique eu, varius nec eros. Vestibulum a lacus et ipsum elementum tincidunt. Nunc varius nulla quis mauris consequat ornare. Morbi molestie sapien iaculis, scelerisque quam et, convallis sem. Vestibulum sodales, lorem sed lobortis interdum, arcu velit porttitor tortor, ut elementum augue augue malesuada augue. Aliquam blandit lectus tellus, ac condimentum metus consequat sit amet. Donec at egestas velit.
+          p.c1 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ex purus, bibendum non dolor sed, dapibus pulvinar magna. Fusce magna mi, egestas dapibus pharetra vel, vehicula ut nisl. Nam in est ante. Proin pretium risus non justo consequat, eget iaculis nulla dictum. Aenean suscipit tincidunt ipsum vitae volutpat. Pellentesque cursus augue vitae diam vehicula interdum. Duis scelerisque ipsum a ex luctus, sit amet efficitur leo molestie. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque volutpat diam sit amet turpis faucibus sollicitudin. Morbi bibendum nunc sit amet lectus faucibus, vitae bibendum nisl sagittis. Nam lacinia mollis ante a ultricies. Nunc et ullamcorper mi. Sed luctus purus ut magna ultricies interdum. Phasellus nisi augue, vestibulum a tellus quis, vehicula rhoncus felis. Sed dictum, lorem et porta congue, orci risus tempus tellus, vel congue orci est non felis.
+          p.c2 Vivamus aliquet, dolor et viverra pulvinar, est mauris pretium lorem, eget ullamcorper nulla mi et neque. Cras sem est, facilisis sit amet neque sit amet, commodo pulvinar ipsum. Vivamus at tempor nisl. Donec nunc libero, feugiat sit amet vulputate et, pulvinar eget tellus. Morbi ipsum nibh, volutpat et faucibus vel, mollis non magna. Aliquam quis massa volutpat, luctus odio id, finibus lacus. Ut pharetra et turpis vel imperdiet. In ultricies ullamcorper nisi, et convallis dui. Ut vitae elit et sapien lacinia placerat ut eu mi. Mauris mauris eros, condimentum nec tristique eu, varius nec eros. Vestibulum a lacus et ipsum elementum tincidunt. Nunc varius nulla quis mauris consequat ornare. Morbi molestie sapien iaculis, scelerisque quam et, convallis sem. Vestibulum sodales, lorem sed lobortis interdum, arcu velit porttitor tortor, ut elementum augue augue malesuada augue. Aliquam blandit lectus tellus, ac condimentum metus consequat sit amet. Donec at egestas velit.
 
     //- script( src = 'https://apis.google.com/js/api.js' )
     script( src = '../js/main.js' )

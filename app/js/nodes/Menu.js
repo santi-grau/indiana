@@ -56,13 +56,16 @@ class Menu {
         this.node.className = ''
     }
 
-	step( time ){
-        if( !this.hoverActive ) return
+    animateLines( ){
         this.lines.forEach( l => {
             l.p += l.s * this.moveSpeed
             if( Math.abs( l.p ) >= l.w ) l.p = 0
             l.el.style.transform = 'translate3d( ' + l.p + 'px, 0px, 0px )'
-        });
+        })
+    }
+
+	step( time ){
+        this.hoverActive && this.animateLines( )
 	}
 }
 
