@@ -3,17 +3,40 @@ class Menu {
         this.node = node
         this.pattern = this.node.getElementsByClassName( 'pattern' )[ 0 ]
         this.inner = this.node.getElementsByClassName( 'inner' )[ 0 ]
+        this.hamburger = this.node.getElementsByClassName( 'hamburger' )[ 0 ]
         this.moveSpeed = 3
+        
         Array.from( this.node.getElementsByClassName( 'but' ) ).forEach( e => {
             e.addEventListener( 'mouseenter', this.mouseEnter.bind( this ) )
             e.addEventListener( 'mouseleave', this.mouseLeave.bind( this ) )
+            e.addEventListener( 'mousedown', this.butDown.bind( this ) )
         })
-        
+
+        this.hamburger.addEventListener( 'mousedown' , this.openMenu.bind( this ) )
         this.hoverActive = false
 	}
 
-    mouseEnter( e ){
+    openMenu( e ){
+        if( !this.node.classList.contains( 'active' ) ){
+            this.node.classList.add( 'active' )
+            document.body.classList.add( 'menuMobile' )
+        } else {
+            this.node.classList.remove( 'active' )
+            document.body.classList.remove( 'menuMobile' )
+        }
+    }
+
+    butDown( e ){
+        if( !document.body.classList.contains( 'menuMobile' ) ) return
+        setTimeout( e => {
+            this.node.classList.remove( 'active' )
+            document.body.classList.remove( 'menuMobile' )
+        }, 300 )
         
+    }
+
+    mouseEnter( e ){
+        if( document.body.classList.contains( 'menuMobile' ) ) return
         this.hoverActive = true
         
         if( this.mouseOutTimer ) {
@@ -47,6 +70,7 @@ class Menu {
     }
 
     mouseLeave( e ){
+        if( document.body.classList.contains( 'menuMobile' ) ) return
         if( !this.mouseOutTimer ) this.mouseOutTimer = setTimeout( this.mouseOut.bind( this ), 100 )
     }
 

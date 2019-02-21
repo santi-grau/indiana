@@ -189,7 +189,7 @@ body
     transition opacity 0.4s
     &.active
         opacity 1
-    #title
+    .title
         transform-origin 50% 0
         width 448px
         height 115px
@@ -197,6 +197,10 @@ body
         background-position center center
         background-size contain
         margin 0px auto
+        &#titleWhite
+            background url('../assets/logo_white.svg') 100% 100% no-repeat
+            display none
+        
     #share
         position absolute
         top 0px
@@ -220,6 +224,16 @@ body
     top 0px
     left 0px
     z-index 1
+    .hamburger
+        pointer-events auto
+        z-index 100
+        display none
+        position absolute
+        top 20px
+        right 20px
+        width 20px
+        height 20px
+        background url('../assets/hamburger.svg') 100% 100% no-repeat
     &.modularsystems
         background blueColor
         color greenColor
@@ -324,48 +338,79 @@ body
 
 
 @media only screen and (max-width: 768px)
+    body.menuMobile
+        #header
+            opacity 1
+            pointer-events none
+            z-index 100
+            #title
+                display none
+            #titleWhite
+                display block
+    #menu
+        .hamburger
+            display block
+        ul
+            display none
+            top 50px
+        &.active
+            background #000000
+            .hamburger
+                background url('../assets/closeMenu.svg') 100% 100% no-repeat
+            #buts
+                display block
+                li
+                    a
+                        color #ffffff
     #header
-        #title
-            width 240px
-            height 47px
+        top 0
+        .title
+            margin 20px
+            width 154px
+            height 37px
+            transform-origin 0 0
+            transform scale( 1, 1 ) !important
         #share
+            display none
             position absolute
-            top 0px
+            top 20px
             right 20px
             .sharebut
                 width 16px
                 height 16px
                 margin-bottom 8px
     #about
-        font-size 42px
-        line-height 38px
-        letter-spacing -3px
+        font-size 29px
+        line-height 27px
+        letter-spacing 0px
         .inner
             .body
-                width 80%
+                width 318px
+                padding 30px 0
+                margin 0 auto
     
     #modularSystems
         .inner
-            width 80%
+            width 318px
             position relative
             transform none
             left 0
             top 0
+            padding 30px 0
             .title
-                font-size 17px
-                margin-bottom 34px
-                
+                font-size 24px
+                margin-bottom 24px
             .body
                 float none
-                font-size 14px
-                line-height 14px
+                font-size 16px
+                line-height 20px
                 width 100%
                 p
-                    margin-top 20px 
+                    margin-top 22px 
             .image
                 float none
                 width 100%
-                height 50vw
+                height 205px
 
     
     #footer

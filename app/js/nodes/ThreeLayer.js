@@ -1,10 +1,10 @@
-import {  Vector2, WebGLRenderer, Scene, OrthographicCamera, Object3D, CubeTextureLoader, TextureLoader, MeshStandardMaterial, FileLoader, Group, BufferGeometry, BufferAttribute, MeshPhongMaterial, Mesh } from 'three'
+import {  Vector2, WebGLRenderer, Scene, OrthographicCamera, Object3D, sRGBEncoding, MeshMatcapMaterial, TextureLoader } from 'three'
 
-import OBJLoader from 'three-obj-loader'
-import mesh from '../../assets/home.obj'
+import matCapMetal from '../../assets/matcapBlack.png'
+import matCapWood from '../../assets/matcapWood.png'
 
-import cubTex from '../../assets/cubemap/*.jpg'
-import geoTex from '../../assets/textures/low/*.jpg'
+import GLTFLoader from 'three-gltf-loader'
+import model from '../../assets/model.gltf'
 
 class ThreeLayer {
 	constructor( node ){
@@ -21,35 +21,137 @@ class ThreeLayer {
         
         this.orbitGroup = new Object3D()
         this.scene.add( this.orbitGroup )
+
+        this.inner = new Object3D()
+        this.inner.position.set( -2, -2, 0 )
+        this.orbitGroup.add( this.inner )
         
-        this.cubeTexture = new CubeTextureLoader().load( [ cubTex.px, cubTex.nx, cubTex.py, cubTex.ny, cubTex.pz, cubTex.nz ] );
-        
-        let THREE = { FileLoader : FileLoader, Group : Group, BufferGeometry : BufferGeometry, BufferAttribute : BufferAttribute, MeshPhongMaterial : MeshPhongMaterial, Mesh : Mesh }
-        OBJLoader(THREE)
-        new THREE.OBJLoader().load( mesh, this.loaded.bind( this ) )
+
+        const loader = new GLTFLoader();
+        loader.load(
+            model,
+            ( gltf ) => {
+                var blocks = { }
+                gltf.scene.children.forEach( child => blocks[ child.name ] = child )
+
+                var loader = new TextureLoader(  )
+                var matcapMetal = loader.load( matCapMetal, function ( ) {
+                    matcapMetal.encoding = sRGBEncoding;
+                } )
+
+                var matcapWood = loader.load( matCapWood, function ( ) {
+                    matcapWood.encoding = sRGBEncoding;
+                } )
+                
+                var b = blocks.b1.clone()
+                b.position.set( 0, 0, 0 )
+                b.material = new MeshMatcapMaterial( { matcap : matcapMetal } )
+                this.inner.add( b )
+
+                var b = blocks.b1.clone()
+                b.position.set( 1, 0, 0 )
+                b.material = new MeshMatcapMaterial( { matcap : matcapMetal } )
+                this.inner.add( b )
+
+                var b = blocks.b1.clone()
+                b.position.set( 2, 0, 0 )
+                b.material = new MeshMatcapMaterial( { matcap : matcapMetal } )
+                this.inner.add( b )
+
+                var b = blocks.c3.clone()
+                b.position.set( 2, 0, 0 )
+                b.material = new MeshMatcapMaterial( { matcap : matcapWood } )
+                this.inner.add( b )
+
+                var b = blocks.d.clone()
+                b.position.set( 2.075, 0.075, 0 )
+                b.material = new MeshMatcapMaterial( { matcap : matcapWood } )
+                this.inner.add( b )
+
+                var b = blocks.b1.clone()
+                b.position.set( 3, 0, 0 )
+                b.material = new MeshMatcapMaterial( { matcap : matcapMetal } )
+                this.inner.add( b )
+
+                var b = blocks.b10.clone()
+                b.rotation.set( 0, 0, Math.PI / 2 )
+                b.position.set( 1, 2, 0 )
+                b.material = new MeshMatcapMaterial( { matcap : matcapMetal } )
+                this.inner.add( b )
+
+                var b = blocks.c2.clone()
+                b.position.set( 1, 1, 0 )
+                b.rotation.set( 0, 0, Math.PI / 2 )
+                b.material = new MeshMatcapMaterial( { matcap : matcapWood } )
+                this.inner.add( b )
+
+                var b = blocks.b1.clone()
+                b.position.set( 1, 1, 0 )
+                b.material = new MeshMatcapMaterial( { matcap : matcapMetal } )
+                this.inner.add( b )
+
+                var b = blocks.b1.clone()
+                b.position.set( 2, 1, 0 )
+                b.material = new MeshMatcapMaterial( { matcap : matcapMetal } )
+                this.inner.add( b )
+
+                var b = blocks.b1.clone()
+                b.position.set( 3, 1, 0 )
+                b.material = new MeshMatcapMaterial( { matcap : matcapMetal } )
+                this.inner.add( b )
+
+                var b = blocks.b1.clone()
+                b.position.set( 1, 2, 0 )
+                b.material = new MeshMatcapMaterial( { matcap : matcapMetal } )
+                this.inner.add( b )
+
+                var b = blocks.b10.clone()
+                b.position.set( 3, 2, 0 )
+                b.material = new MeshMatcapMaterial( { matcap : matcapMetal } )
+                this.inner.add( b )
+
+                var b = blocks.c2.clone()
+                b.position.set( 2, 2, 0 )
+                b.material = new MeshMatcapMaterial( { matcap : matcapWood } )
+                this.inner.add( b )
+
+                var b = blocks.b1.clone()
+                b.position.set( 0, 3, 0 )
+                b.material = new MeshMatcapMaterial( { matcap : matcapMetal } )
+                this.inner.add( b )
+
+                var b = blocks.b1.clone()
+                b.position.set( 1, 3, 0 )
+                b.material = new MeshMatcapMaterial( { matcap : matcapMetal } )
+                this.inner.add( b )
+
+                var b = blocks.b1.clone()
+                b.position.set( 2, 3, 0 )
+                b.material = new MeshMatcapMaterial( { matcap : matcapMetal } )
+                this.inner.add( b )
+
+                var b = blocks.b1.clone()
+                b.position.set( 3, 3, 0 )
+                b.material = new MeshMatcapMaterial( { matcap : matcapMetal } )
+                this.inner.add( b )
+
+            }
+        )
     }
 
-    loaded( group ){
-        var loader = new TextureLoader()
-        group.children.forEach( mesh => { 
-            let id = mesh.name.split( '.' )[ 0 ].split( '_' )[ 0 ]
-            var material = new MeshStandardMaterial({
-                map : loader.load( geoTex[ id + '_map' ] ),
-                envMap : this.cubeTexture,
-                envMapIntensity : 6,
-                roughness : ( id == 'mbox' ) ? 0.6 : 0.8,
-                metalness : ( id == 'mbox' ) ? 0.6 : 0.4
-            })
-            mesh.material = material
+    updateBlocks( p ){
+        let blocks = this.inner.children
+        let seq = Math.max( 0, Math.round( ( p * 1.2 + 0.5 ) * blocks.length ) )
+
+        blocks.forEach( ( block, id ) => {
+            block.visible = ( id <= seq )
         } )
-        group.scale.set( 0.1, 0.1, 0.1 )
-        group.position.set( -187.5, -125, 0 )
-        
-        this.orbitGroup.add( group )
+
     }
 
     mouseMove( e ){
         this.mouse = new Vector2( e.clientX / this.node.offsetWidth - 0.5, e.clientY / this.node.offsetHeight - 0.5 )
+        this.updateBlocks( this.mouse.x )
     }
 
     resize( width, height ){
@@ -63,16 +165,15 @@ class ThreeLayer {
         var scale
         if( width < 768 ) scale = 1 + ( width / 768 - 1 ) * 0.5
         else scale = Math.min( 1.7, 1 + ( width / 768 - 1 ) )
-
+        scale *= 60
         this.orbitGroup.scale.set( scale, scale, scale )
-        this.orbitGroup.position.y = -height * 0.1
     }
 
 	step( time ){
         this.renderer.render( this.scene, this.camera )
 
-        this.orbitGroup.rotation.y += ( ( -Math.PI / 4 * this.mouse.x ) - this.orbitGroup.rotation.y ) * 0.1
-        this.orbitGroup.rotation.x += ( ( Math.PI / 8 - Math.PI / 8 * this.mouse.y ) - this.orbitGroup.rotation.x ) * 0.1
+        this.orbitGroup.rotation.y += ( ( -Math.PI / 8 * this.mouse.x ) - this.orbitGroup.rotation.y ) * 0.1
+        this.orbitGroup.rotation.x += ( ( Math.PI / 8 - Math.PI / 16 * this.mouse.y ) - this.orbitGroup.rotation.x ) * 0.1
 	}
 }
 
