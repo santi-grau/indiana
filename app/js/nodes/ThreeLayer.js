@@ -1,4 +1,4 @@
-import {  Vector2, WebGLRenderer, Scene, OrthographicCamera, Object3D, sRGBEncoding, MeshMatcapMaterial, TextureLoader } from 'three'
+import {  Vector2, WebGLRenderer, Scene, OrthographicCamera, Object3D, Texture, sRGBEncoding, MeshMatcapMaterial, TextureLoader } from 'three'
 
 import matCapMetal from '../../assets/matcapBlack.png'
 import matCapWood from '../../assets/matcapWood.png'
@@ -27,112 +27,122 @@ class ThreeLayer {
         this.orbitGroup.add( this.inner )
         
 
-        const loader = new GLTFLoader();
-        loader.load(
+        const gltfLoader = new GLTFLoader( )
+        const texLoader = new TextureLoader( )
+        
+        var matcapMetal = new Texture()
+        matcapMetal.encoding = sRGBEncoding
+        matcapMetal = texLoader.load( matCapMetal )
+        var metal = new MeshMatcapMaterial( { matcap : matcapMetal } )
+
+        var matcapWood = new Texture()
+        matcapWood.encoding = sRGBEncoding
+        matcapWood = texLoader.load( matCapWood )
+        var wood = new MeshMatcapMaterial( { matcap : matcapWood } )
+        
+        
+        
+        gltfLoader.load(
             model,
             ( gltf ) => {
                 var blocks = { }
                 gltf.scene.children.forEach( child => blocks[ child.name ] = child )
 
-                var loader = new TextureLoader(  )
-                var matcapMetal = loader.load( matCapMetal, function ( ) {
-                    matcapMetal.encoding = sRGBEncoding;
-                } )
-
-                var matcapWood = loader.load( matCapWood, function ( ) {
-                    matcapWood.encoding = sRGBEncoding;
-                } )
+                
+                
+                
+                
                 
                 var b = blocks.b1.clone()
                 b.position.set( 0, 0, 0 )
-                b.material = new MeshMatcapMaterial( { matcap : matcapMetal } )
+                b.material = metal
                 this.inner.add( b )
 
                 var b = blocks.b1.clone()
                 b.position.set( 1, 0, 0 )
-                b.material = new MeshMatcapMaterial( { matcap : matcapMetal } )
+                b.material = metal
                 this.inner.add( b )
 
                 var b = blocks.b1.clone()
                 b.position.set( 2, 0, 0 )
-                b.material = new MeshMatcapMaterial( { matcap : matcapMetal } )
+                b.material = metal
                 this.inner.add( b )
 
                 var b = blocks.c3.clone()
                 b.position.set( 2, 0, 0 )
-                b.material = new MeshMatcapMaterial( { matcap : matcapWood } )
+                b.material = wood
                 this.inner.add( b )
 
                 var b = blocks.d.clone()
                 b.position.set( 2.075, 0.075, 0 )
-                b.material = new MeshMatcapMaterial( { matcap : matcapWood } )
+                b.material = wood
                 this.inner.add( b )
 
                 var b = blocks.b1.clone()
                 b.position.set( 3, 0, 0 )
-                b.material = new MeshMatcapMaterial( { matcap : matcapMetal } )
+                b.material = metal
                 this.inner.add( b )
 
                 var b = blocks.b10.clone()
                 b.rotation.set( 0, 0, Math.PI / 2 )
                 b.position.set( 1, 2, 0 )
-                b.material = new MeshMatcapMaterial( { matcap : matcapMetal } )
+                b.material = metal
                 this.inner.add( b )
 
                 var b = blocks.c2.clone()
                 b.position.set( 1, 1, 0 )
                 b.rotation.set( 0, 0, Math.PI / 2 )
-                b.material = new MeshMatcapMaterial( { matcap : matcapWood } )
+                b.material = wood
                 this.inner.add( b )
 
                 var b = blocks.b1.clone()
                 b.position.set( 1, 1, 0 )
-                b.material = new MeshMatcapMaterial( { matcap : matcapMetal } )
+                b.material = metal
                 this.inner.add( b )
 
                 var b = blocks.b1.clone()
                 b.position.set( 2, 1, 0 )
-                b.material = new MeshMatcapMaterial( { matcap : matcapMetal } )
+                b.material = metal
                 this.inner.add( b )
 
                 var b = blocks.b1.clone()
                 b.position.set( 3, 1, 0 )
-                b.material = new MeshMatcapMaterial( { matcap : matcapMetal } )
+                b.material = metal
                 this.inner.add( b )
 
                 var b = blocks.b1.clone()
                 b.position.set( 1, 2, 0 )
-                b.material = new MeshMatcapMaterial( { matcap : matcapMetal } )
+                b.material = metal
                 this.inner.add( b )
 
                 var b = blocks.b10.clone()
                 b.position.set( 3, 2, 0 )
-                b.material = new MeshMatcapMaterial( { matcap : matcapMetal } )
+                b.material = metal
                 this.inner.add( b )
 
                 var b = blocks.c2.clone()
                 b.position.set( 2, 2, 0 )
-                b.material = new MeshMatcapMaterial( { matcap : matcapWood } )
+                b.material = wood
                 this.inner.add( b )
 
                 var b = blocks.b1.clone()
                 b.position.set( 0, 3, 0 )
-                b.material = new MeshMatcapMaterial( { matcap : matcapMetal } )
+                b.material = metal
                 this.inner.add( b )
 
                 var b = blocks.b1.clone()
                 b.position.set( 1, 3, 0 )
-                b.material = new MeshMatcapMaterial( { matcap : matcapMetal } )
+                b.material = metal
                 this.inner.add( b )
 
                 var b = blocks.b1.clone()
                 b.position.set( 2, 3, 0 )
-                b.material = new MeshMatcapMaterial( { matcap : matcapMetal } )
+                b.material = metal
                 this.inner.add( b )
 
                 var b = blocks.b1.clone()
                 b.position.set( 3, 3, 0 )
-                b.material = new MeshMatcapMaterial( { matcap : matcapMetal } )
+                b.material = metal
                 this.inner.add( b )
 
             }
@@ -172,8 +182,8 @@ class ThreeLayer {
 	step( time ){
         this.renderer.render( this.scene, this.camera )
 
-        this.orbitGroup.rotation.y += ( ( -Math.PI / 8 * this.mouse.x ) - this.orbitGroup.rotation.y ) * 0.1
-        this.orbitGroup.rotation.x += ( ( Math.PI / 8 - Math.PI / 16 * this.mouse.y ) - this.orbitGroup.rotation.x ) * 0.1
+        this.orbitGroup.rotation.y += ( ( -Math.PI / 6 * this.mouse.x ) - this.orbitGroup.rotation.y ) * 0.1
+        this.orbitGroup.rotation.x += ( ( Math.PI / 6 - Math.PI / 16 * this.mouse.y ) - this.orbitGroup.rotation.x ) * 0.1
 	}
 }
 

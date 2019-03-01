@@ -27,6 +27,9 @@ class Menu {
     }
 
     butDown( e ){
+        document.body.classList.add( 'menuDown' )
+        // if( this.menuTimeout ) clearTimeout( this.menuTimeout )
+        // this.menuTimeout = setTimeout( e => document.body.classList.remove( 'menuDown' ), 1000 )
         if( !document.body.classList.contains( 'menuMobile' ) ) return
         setTimeout( e => {
             this.node.classList.remove( 'active' )
@@ -37,6 +40,7 @@ class Menu {
 
     mouseEnter( e ){
         if( document.body.classList.contains( 'menuMobile' ) ) return
+        document.body.classList.remove( 'menuDown' )
         this.hoverActive = true
         
         if( this.mouseOutTimer ) {
@@ -78,6 +82,7 @@ class Menu {
         this.hoverActive = false
         this.inner.innerHTML = ''
         this.node.className = ''
+        document.body.classList.remove( 'menuDown' )
     }
 
     animateLines( ){

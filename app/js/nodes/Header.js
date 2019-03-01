@@ -30,7 +30,7 @@ class Header {
             if( this.scrollEased > 100 ) this.node.classList.remove( 'active' )
             else this.node.classList.add( 'active' )
         } else {
-            this.node.classList.add( 'active' )
+            if( !document.body.classList.contains( 'menuDown' ) ) this.node.classList.add( 'active' )
         }
 
         if( this.scrollTop ){
