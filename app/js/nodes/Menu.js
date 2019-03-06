@@ -54,17 +54,17 @@ class Menu {
         var line = document.createElement( 'div' )
         line.classList.add( 'line' )
         var lineBuffer = 4
-        for( var i = 0 ; i < 20 ; i++ ) line.innerHTML += '<span>' + e.target.innerHTML + ' </span>'
+        for( var i = 0 ; i < 10 ; i++ ) line.innerHTML += '<span>' + e.target.innerHTML + ' </span>'
         
         while( this.inner.offsetHeight < ( this.pattern.offsetHeight ) ) this.inner.appendChild( line.cloneNode(true) )
         for( var i = 0 ; i < lineBuffer ; i++ ) this.inner.appendChild( line.cloneNode(true) )
 
-        Array.from( this.inner.childNodes ).forEach( e => {
+        Array.from( this.inner.childNodes ).forEach( ( e, id ) => {
             e.style['margin-left'] = -500 - Math.random() * 200 + 'px'
             this.lines.push({
                 el : e,
                 p : 0,
-                s : Math.random() - 0.5,
+                s : ( ( id % 2 == 0 ) ? 1 : -1 ) * ( 0.4 + Math.random( ) * 0.6 ),
                 w : e.childNodes[ 0 ].offsetWidth
             })
         });

@@ -182,8 +182,8 @@ class ThreeLayer {
 	step( time ){
         this.renderer.render( this.scene, this.camera )
 
-        this.orbitGroup.rotation.y += ( ( -Math.PI / 6 * this.mouse.x ) - this.orbitGroup.rotation.y ) * 0.1
-        this.orbitGroup.rotation.x += ( ( Math.PI / 6 - Math.PI / 16 * this.mouse.y ) - this.orbitGroup.rotation.x ) * 0.1
+        this.orbitGroup.rotation.y += ( ( -Math.PI / 4 * this.mouse.x ) - this.orbitGroup.rotation.y ) * 0.1
+        this.orbitGroup.rotation.x += ( ( Math.PI / 6 - Math.PI / 4 * this.mouse.y ) - this.orbitGroup.rotation.x ) * 0.1
 	}
 }
 
