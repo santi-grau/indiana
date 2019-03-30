@@ -1,9 +1,9 @@
 import {  Vector2, WebGLRenderer, Scene, OrthographicCamera, Object3D, Texture, sRGBEncoding, MeshMatcapMaterial,MeshBasicMaterial, ShaderMaterial, MeshStandardMaterial, CubeTextureLoader, TextureLoader } from 'three'
 
-import cubemap from '../../assets/cube/*.jpg'
+import cubemap from '../../assets/cubemap/*.jpg'
 
 import GLTFLoader from 'three-gltf-loader'
-import model from '../../assets/ani/anifinal2.gltf'
+import model from '../../assets/ani/ani.gltf'
 import normals from '../../assets/ani/png/*.png'
 import texs from '../../assets/ani/jpg/*.jpg'
 import lms from '../../assets/lightmaps/*.jpg'
@@ -109,9 +109,8 @@ class ThreeLayer {
         var ani = ['b0','b1','b2','b3','B4','B5','B6','B7','B8','B9','B10','B11','B12','B13','c1Bake','c2Bake','c3Bake', 'dBake']
         
         let blocks = this.inner.children
-        // let seq = Math.max( 0, Math.round( ( p * 1.2 + 0.5 ) * blocks.length ) )
 
-        let aniIndex = Math.floor( ( 1 - Math.abs( p * 2 ) ) * ani.length )
+        let aniIndex = Math.floor( ( 1 - Math.abs( Math.pow( p * 2, 3 ) ) ) * ani.length )
         
         for( var i = 0 ; i < aniIndex + 1 ; i++ ){
             blocks.forEach( ( block, id ) => {
