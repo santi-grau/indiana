@@ -1,10 +1,13 @@
-import {  Vector2, WebGLRenderer, Scene, OrthographicCamera, Object3D, Texture, sRGBEncoding, MeshMatcapMaterial, TextureLoader } from 'three'
+import {  Vector2, WebGLRenderer, Scene, OrthographicCamera, Object3D, Texture, sRGBEncoding, MeshMatcapMaterial,MeshBasicMaterial, ShaderMaterial, MeshStandardMaterial, CubeTextureLoader, TextureLoader } from 'three'
 
-import matCapMetal from '../../assets/matcapBlack.png'
-import matCapWood from '../../assets/matcapWood.png'
+import cubemap from '../../assets/cube/*.jpg'
 
 import GLTFLoader from 'three-gltf-loader'
-import model from '../../assets/model.gltf'
+import model from '../../assets/ani/anifinal2.gltf'
+import normals from '../../assets/ani/png/*.png'
+import texs from '../../assets/ani/jpg/*.jpg'
+import lms from '../../assets/lightmaps/*.jpg'
+import shadows from '../../assets/shadow/*.png'
 
 class ThreeLayer {
 	constructor( node ){
@@ -23,139 +26,112 @@ class ThreeLayer {
         this.scene.add( this.orbitGroup )
 
         this.inner = new Object3D()
-        this.inner.position.set( -2, -2, 0 )
+        this.inner.position.set( 0, -2, 0 )
         this.orbitGroup.add( this.inner )
         
 
         const gltfLoader = new GLTFLoader( )
         const texLoader = new TextureLoader( )
-        
-        var matcapMetal = new Texture()
-        matcapMetal.encoding = sRGBEncoding
-        matcapMetal = texLoader.load( matCapMetal )
-        var metal = new MeshMatcapMaterial( { matcap : matcapMetal } )
 
-        var matcapWood = new Texture()
-        matcapWood.encoding = sRGBEncoding
-        matcapWood = texLoader.load( matCapWood )
-        var wood = new MeshMatcapMaterial( { matcap : matcapWood } )
+        var maps = { c1Bake : 'Mbox1', c2Bake : 'Mbox2', c3Bake : 'Mbox4', dBake : 'Mbox3' }
         
+        this.lightmaps = []
+        this.shadowmaps = []
+        Object.values( lms ).forEach( lm => {
+            var lmt = texLoader.load( lm )
+            lmt.flipY = false
+            this.lightmaps.push( lmt ) 
+        })
+
+        Object.values( shadows ).forEach( sd => {
+            var sdt = texLoader.load( sd )
+            sdt.flipY = false
+            this.shadowmaps.push( sdt ) 
+        })
         
-        
+        var loader = new CubeTextureLoader();
+        var textureCube = loader.load( [ cubemap.px, cubemap.nx, cubemap.py, cubemap.ny, cubemap.pz, cubemap.nz ] );
+
         gltfLoader.load(
             model,
             ( gltf ) => {
-                var blocks = { }
-                gltf.scene.children.forEach( child => blocks[ child.name ] = child )
-
                 
-                
-                
-                
-                
-                var b = blocks.b1.clone()
-                b.position.set( 0, 0, 0 )
-                b.material = metal
-                this.inner.add( b )
-
-                var b = blocks.b1.clone()
-                b.position.set( 1, 0, 0 )
-                b.material = metal
-                this.inner.add( b )
-
-                var b = blocks.b1.clone()
-                b.position.set( 2, 0, 0 )
-                b.material = metal
-                this.inner.add( b )
-
-                var b = blocks.c3.clone()
-                b.position.set( 2, 0, 0 )
-                b.material = wood
-                this.inner.add( b )
-
-                var b = blocks.d.clone()
-                b.position.set( 2.075, 0.075, 0 )
-                b.material = wood
-                this.inner.add( b )
-
-                var b = blocks.b1.clone()
-                b.position.set( 3, 0, 0 )
-                b.material = metal
-                this.inner.add( b )
-
-                var b = blocks.b10.clone()
-                b.rotation.set( 0, 0, Math.PI / 2 )
-                b.position.set( 1, 2, 0 )
-                b.material = metal
-                this.inner.add( b )
-
-                var b = blocks.c2.clone()
-                b.position.set( 1, 1, 0 )
-                b.rotation.set( 0, 0, Math.PI / 2 )
-                b.material = wood
-                this.inner.add( b )
-
-                var b = blocks.b1.clone()
-                b.position.set( 1, 1, 0 )
-                b.material = metal
-                this.inner.add( b )
-
-                var b = blocks.b1.clone()
-                b.position.set( 2, 1, 0 )
-                b.material = metal
-                this.inner.add( b )
-
-                var b = blocks.b1.clone()
-                b.position.set( 3, 1, 0 )
-                b.material = metal
-                this.inner.add( b )
-
-                var b = blocks.b1.clone()
-                b.position.set( 1, 2, 0 )
-                b.material = metal
-                this.inner.add( b )
-
-                var b = blocks.b10.clone()
-                b.position.set( 3, 2, 0 )
-                b.material = metal
-                this.inner.add( b )
-
-                var b = blocks.c2.clone()
-                b.position.set( 2, 2, 0 )
-                b.material = wood
-                this.inner.add( b )
-
-                var b = blocks.b1.clone()
-                b.position.set( 0, 3, 0 )
-                b.material = metal
-                this.inner.add( b )
-
-                var b = blocks.b1.clone()
-                b.position.set( 1, 3, 0 )
-                b.material = metal
-                this.inner.add( b )
-
-                var b = blocks.b1.clone()
-                b.position.set( 2, 3, 0 )
-                b.material = metal
-                this.inner.add( b )
-
-                var b = blocks.b1.clone()
-                b.position.set( 3, 3, 0 )
-                b.material = metal
-                this.inner.add( b )
-
+                gltf.scene.children.forEach( child => {
+                    var c = child.clone()
+                    if( c.name !== 'Plane'){
+                        var key = 'b2'
+                        
+                        if( maps[c.name] ) key = maps[c.name]  
+    
+                        var n = texLoader.load( normals[ key + '_normal'])
+                        n.flipY = false
+    
+                        var m = texLoader.load( texs[ key + '_baseColor'])
+                        m.flipY = false
+                        
+                        var orm = texLoader.load( texs[ key + '_ORM'])
+                        orm.flipY = false
+    
+                        c.material = new MeshStandardMaterial({
+                            envMap : textureCube,
+                            envMapIntensity : 1,
+                            map : m,
+                            aoMap : orm,
+                            aoMapIntensity : 0.5,
+                            roughnessMap : orm,
+                            normalMap : n,
+                            normalScale : new Vector2(2,2),
+                            lightMap : this.lightmaps[10],
+                            lightMapIntensity : 1,
+                            // metalness : 0x000000,
+                            metalnessMap : orm
+                        })
+                    } else {
+                        
+                        var s = texLoader.load( shadows[17] )
+                        s.flipY = false
+                        this.plane = c
+                        c.material = new ShaderMaterial( {
+                            uniforms: {
+                                tex: { value: s }
+                            },
+                            vertexShader: 'varying vec2 vUv; void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }',
+                            fragmentShader: 'uniform sampler2D tex; varying vec2 vUv; void main() { vec2 uv = vUv; vec4 c = texture2D(tex, uv); uv *=  1.0 - uv.yx; float vig = uv.x*uv.y * 15.0; vig = pow(vig, 2.0); gl_FragColor = vec4( 0.0, 0.0, 0.0, c * vig  ); }'
+                        } );
+                    }
+                    this.inner.add( c )
+                } )
             }
         )
     }
 
     updateBlocks( p ){
+        var ani = ['b0','b1','b2','b3','B4','B5','B6','B7','B8','B9','B10','B11','B12','B13','c1Bake','c2Bake','c3Bake', 'dBake']
+        
         let blocks = this.inner.children
-        let seq = Math.max( 0, Math.round( ( p * 1.2 + 0.5 ) * blocks.length ) )
+        // let seq = Math.max( 0, Math.round( ( p * 1.2 + 0.5 ) * blocks.length ) )
 
-        blocks.forEach( ( block, id ) => {
-            block.visible = ( id <= seq )
-        } )
+        let aniIndex = Math.floor( ( 1 - Math.abs( p * 2 ) ) * ani.length )
+        
+        for( var i = 0 ; i < aniIndex + 1 ; i++ ){
+            blocks.forEach( ( block, id ) => {
+                if( block.name == ani[ i ] ) {
+                    block.visible = true
+                    block.material.lightMap = this.lightmaps[aniIndex]
+                }
+            })
+        }
+
+        for( var i = aniIndex + 1; i < ani.length ; i++ ){
+            blocks.forEach( ( block, id ) => {
+                if( block.name == ani[ i ] ) {
+                    block.visible = false
+                    block.material.lightMap = this.lightmaps[aniIndex]
+                }
+            })
+        }
+
+        this.plane.material.uniforms.tex.value = this.shadowmaps[aniIndex]
 
     }
 
