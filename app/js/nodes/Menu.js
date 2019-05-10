@@ -48,13 +48,15 @@ class Menu {
             this.mouseOutTimer = null
         }
         this.lines = []
-        this.node.className = e.target.dataset.item
+        // this.node.className = e.target.dataset.item
+        this.node.style.color = e.target.dataset.color
+        this.node.style.background = e.target.dataset.bg
         
         this.inner.innerHTML = ''
         var line = document.createElement( 'div' )
         line.classList.add( 'line' )
         var lineBuffer = 4
-        for( var i = 0 ; i < 10 ; i++ ) line.innerHTML += '<span>' + e.target.innerHTML + ' </span>'
+        for( var i = 0 ; i < 18 ; i++ ) line.innerHTML += '<span>' + e.target.innerHTML + ' </span>'
         
         while( this.inner.offsetHeight < ( this.pattern.offsetHeight ) ) this.inner.appendChild( line.cloneNode(true) )
         for( var i = 0 ; i < lineBuffer ; i++ ) this.inner.appendChild( line.cloneNode(true) )
@@ -82,6 +84,7 @@ class Menu {
         this.hoverActive = false
         this.inner.innerHTML = ''
         this.node.className = ''
+        this.node.style.background = 'none'
         document.body.classList.remove( 'menuDown' )
     }
 

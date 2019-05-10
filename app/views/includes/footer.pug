@@ -1,0 +1,29 @@
+#footer
+    .inner.clearfix
+        .col.information
+            .topLevel INFORMATION
+            ul
+                li #[a.but.info( href = 'javascript:void(0)', data-target = 'about' ) About Us]
+                li #[a.but.info( href = 'javascript:void(0)', data-target = 'press' ) Press Enquiries]
+                li #[a.but.info( href = 'javascript:void(0)', data-target = 'privacy' ) Privacy Policy]
+                li #[a.but.info( href = 'javascript:void(0)', data-target = 'terms' ) Terms <br/>&amp; Conditions]
+                li #[a.but.info( href = 'javascript:void(0)', data-target = 'cookies' ) Cookies]
+        .col.follow
+            .topLevel FOLLOW US
+            ul
+                li #[a.but.follow( href = 'javascript:void(0)', data-target = 'ig' ) Instagram]
+                li #[a.but.follow( href = 'javascript:void(0)', data-target = 'fb' ) Facebook]
+        .col.newsletter
+            .topLevel SIGN UP FOR OUR NEWSLETTER
+            .inputField
+                input( type = 'text', placeholder = 'Name and Surname' )
+            .inputField
+                input( type = 'text', placeholder = 'Business' )
+            .inputField
+                input( type = 'text', placeholder = 'Email' )
+            #terms.clearfix
+                span.checkbox 
+                .line.line1
+                .line.line2
+                span.terms I accept #[a(href='javascript:void(0)') terms and conditions ]
+            .sendBut SEND

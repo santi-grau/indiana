@@ -1,0 +1,96 @@
+#footer
+    position relative
+    background #000000
+    color #dddddd
+    z-index 0
+    .inner
+        font-size 30px
+        line-height 34px
+        margin 0 auto
+        padding 72px 0
+        .col
+            float left
+            &.information
+                margin-right 50px
+            .topLevel
+                margin-bottom 30px
+            ul
+                margin 0
+                padding 0
+                list-style-type none
+                li
+                    a
+                        text-decoration none
+                        color #dddddd
+                        line-height 0
+                        &:hover
+                            text-decoration underline
+            &.newsletter
+                float right
+                width 403px
+                margin-right 85px
+                .topLevel
+                    margin-bottom 10px
+                .inputField
+                    input
+                        height 40px
+                        padding 2px 0px 2px 9px
+                        width calc( 100% - 22px )
+                        background none
+                        border solid 1px
+                        color #ffffff
+                        margin-bottom 14px
+                        font-size 25px
+                        &::placeholder
+                            color #ffffff
+                        &:focus
+                            outline none
+                            background #222222
+                #terms
+                    a
+                        color #ffffff
+                    .checkbox
+                        float left
+                        width 40px
+                        height 40px
+                        border solid 1px #ffffff
+                        margin-right 14px
+                        cursor pointer
+                        position relative
+                        &:hover
+                            background #222222
+                        &.active
+                            .line
+                                display block
+                        .line
+                            display none
+                            width 60px
+                            height 0px
+                            border-bottom 1px solid #ffffff
+                            transform rotate(45deg)
+                            transform-origin 0 0
+                            position absolute
+                            top 0
+                            left 0
+                            &.line2
+                                transform rotate(-45deg)
+                                transform-origin 0 0
+                                // transform-origin 100% 0
+                                top 40px
+                                left -1px
+                    .terms
+                        position relative
+                        top 5px
+                .sendBut
+                    width calc( 100% - 22px )
+                    border solid 1px #ffffff
+                    background #ffffff
+                    color #000000
+                    text-align center
+                    margin-top 20px
+                    padding 6px 0px 6px 9px
+                    cursor pointer
+                    &:hover
+                        background #000000
+                        color #ffffff
+                        animation blinkBut 0.4s linear infinite

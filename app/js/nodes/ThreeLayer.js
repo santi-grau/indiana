@@ -96,7 +96,7 @@ class ThreeLayer {
                                 tex: { value: s }
                             },
                             vertexShader: 'varying vec2 vUv; void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }',
-                            fragmentShader: 'uniform sampler2D tex; varying vec2 vUv; void main() { vec2 uv = vUv; vec4 c = texture2D(tex, uv); uv *=  1.0 - uv.yx; float vig = uv.x*uv.y * 15.0; vig = pow(vig, 2.0); gl_FragColor = vec4( 0.0, 0.0, 0.0, c * vig  ); }'
+                            fragmentShader: 'uniform sampler2D tex; varying vec2 vUv; void main() { vec2 uv = vUv; vec4 c = texture2D(tex, uv); uv *=  1.0 - uv.yx; float vig = uv.x*uv.y * 15.0; vig = pow(vig, 2.0); gl_FragColor = vec4( 0.0, 0.0, 0.0, c * vig * 0.5  ); }'
                         } );
                     }
                     this.inner.add( c )

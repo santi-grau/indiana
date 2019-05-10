@@ -1,0 +1,88 @@
+#header
+    position fixed
+    z-index 100
+    width 100%
+    top 0px
+    opacity 0
+    transition opacity 0.4s
+    &.active
+        opacity 1
+    .title
+        position relative
+        width 236px
+        height 115px
+        top 23px
+        background url('../assets/logo.svg') 100% 100% no-repeat
+        background-position center top
+        background-size contain
+        margin 0px auto
+        &#titleWhite
+            background url('../assets/logo_white.svg') 100% 100% no-repeat
+            display none
+        
+    #share
+        position absolute
+        top 23px
+        right 23px
+        .sharebut
+            width 20px
+            height 20px
+            margin-bottom 10px
+            background-position center center
+            background-size contain
+            &.instagram
+                background url('../assets/ig.svg') 100% 100% no-repeat
+            &.facebook
+                background url('../assets/fb.svg') 100% 100% no-repeat
+    #menu
+        width 100%
+        height 100%
+        pointer-events none
+        position fixed
+        top 0px
+        left 0px
+        z-index 1
+        .hamburger
+            pointer-events auto
+            z-index 100
+            display none
+            position absolute
+            top 20px
+            right 20px
+            width 20px
+            height 20px
+            background url('../assets/hamburger.svg') 100% 100% no-repeat
+        &.modularsystems
+            background blueColor
+            color greenColor
+        &.aboutus
+            background blueColor
+            color yellowColor
+        .pattern
+            width 100%
+            height 100%
+            font-family indiana
+            font-size 90px
+            line-height 76px
+            position fixed
+            z-index 0
+            transform rotate(-8deg)
+            .inner
+                .line
+                    position relative
+                    width 20000px
+        #buts
+            position relative
+            z-index 1
+            list-style-type none
+            margin 0
+            padding 0
+            margin-top 23px
+            margin-left 23px
+            li
+                a
+                    color #000000
+                    font-size 20px
+                    line-height 22px
+                    text-decoration none
+                    pointer-events auto
