@@ -1,91 +1,47 @@
 doctype
 html
-  head
-    meta(charset='utf-8')
-    meta(http-equiv='Content-Type',content='text/html; charset=utf-8')
-    meta(http-equiv='X-UA-Compatible', content='IE=edge')
-    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no')
-    title Indiana - evolving furniture
-    link(rel='stylesheet', id='mainStylesheet' href='../css/main.styl')
-  body
-    #wrapper
-      #home.section
-        .inner
-          #three
-          #threeLayer
-        
-      #about.section
-        .inner
-          .body
-            | INDIANA EVOLVING
-            | FURNITURE Is a #[span.greenColor MODULAR ]
-            | #[span.greenColor SYSTEM ] LOREM IPSUM
-            | All SPACes #[span.blueColor LIVInG ROOM ]
-            | #[span.redColor BedROOM ] #[span.greenColor OffICE ]
-            | AND #[span.blueColor RETAIL PURPOSES ]
-            | LEARN HOW TO MAKE
-            | YOUR OWN INDIANA
-            | WITH OUR #[span.redColor SIMULaTOR ]
-      #modularSystems.section
-        .inner.clearfix
-          .title Modular System
-          .image
-          .body
-            p
-              | Modular System mus eventio enimodiones nimus volo milles ipsam nonseque sitatur molectem id eumquodi si dolorest, 
-              | namendis eveniet quam, occatem quacium facescide nis aut ipit, untia simen ssimpe ribus. tusciist, eatempore velestinti omnimpelles dolorecus.
-            p
-              | Quis denistr uptaercium facescide nis aut ipit, untia simen ssimpe ribus. Tatus estiandam, nonsequis molorio. Omnihici oditiant as debis 
-              | est acepre offictestia. Acium facescide nis aut ipit, untia simen ssimpe ribus. tusciist, eatempore velestinti omniorulorest.
-      #footer.section
-        .inner.clearfix
-          .col.information
-            .topLevel INFORMATION
-            ul
-              li #[a.but.info( href = 'javascript:void(0)', data-target = 'about' ) About Us]
-              li #[a.but.info( href = 'javascript:void(0)', data-target = 'press' ) Press Enquiries]
-              li #[a.but.info( href = 'javascript:void(0)', data-target = 'privacy' ) Privacy Policy]
-              li #[a.but.info( href = 'javascript:void(0)', data-target = 'terms' ) Terms <br/>&amp; Conditions]
-              li #[a.but.info( href = 'javascript:void(0)', data-target = 'cookies' ) Cookies]
-          .col.follow
-            .topLevel FOLLOW US
-            ul
-              li #[a.but.follow( href = 'javascript:void(0)', data-target = 'ig' ) Instagram]
-              li #[a.but.follow( href = 'javascript:void(0)', data-target = 'fb' ) Facebook]
-          .col.newsletter
-            .topLevel SIGN UP FOR OUR NEWSLETTER
-            .inputField
-              input( type = 'text', placeholder = 'Name and Surname' )
-            .inputField
-              input( type = 'text', placeholder = 'Business' )
-            .inputField
-              input( type = 'text', placeholder = 'Email' )
-            #terms.clearfix
-              span.checkbox 
-                .line.line1
-                .line.line2
-              span.terms I accept #[a(href='javascript:void(0)') terms and conditions ]
-            .sendBut SEND
-    #header.active
-      #title.title
-      #titleWhite.title
-      #share
-        .sharebut.instagram
-        .sharebut.facebook
-    #menu
-      .hamburger
-      .pattern
-        .inner
-      ul#buts
-        li #[a.but( href = '#modularSystems', data-item = 'modularsystems' ) Modular System]
-        li #[a.but( href = '#about', data-item = 'aboutus' ) About us]
-    #modal
-      .close
-      .inner
-        .title Title of the modal
-        .content
-          p.c1 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ex purus, bibendum non dolor sed, dapibus pulvinar magna. Fusce magna mi, egestas dapibus pharetra vel, vehicula ut nisl. Nam in est ante. Proin pretium risus non justo consequat, eget iaculis nulla dictum. Aenean suscipit tincidunt ipsum vitae volutpat. Pellentesque cursus augue vitae diam vehicula interdum. Duis scelerisque ipsum a ex luctus, sit amet efficitur leo molestie. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque volutpat diam sit amet turpis faucibus sollicitudin. Morbi bibendum nunc sit amet lectus faucibus, vitae bibendum nisl sagittis. Nam lacinia mollis ante a ultricies. Nunc et ullamcorper mi. Sed luctus purus ut magna ultricies interdum. Phasellus nisi augue, vestibulum a tellus quis, vehicula rhoncus felis. Sed dictum, lorem et porta congue, orci risus tempus tellus, vel congue orci est non felis.
-          p.c2 Vivamus aliquet, dolor et viverra pulvinar, est mauris pretium lorem, eget ullamcorper nulla mi et neque. Cras sem est, facilisis sit amet neque sit amet, commodo pulvinar ipsum. Vivamus at tempor nisl. Donec nunc libero, feugiat sit amet vulputate et, pulvinar eget tellus. Morbi ipsum nibh, volutpat et faucibus vel, mollis non magna. Aliquam quis massa volutpat, luctus odio id, finibus lacus. Ut pharetra et turpis vel imperdiet. In ultricies ullamcorper nisi, et convallis dui. Ut vitae elit et sapien lacinia placerat ut eu mi. Mauris mauris eros, condimentum nec tristique eu, varius nec eros. Vestibulum a lacus et ipsum elementum tincidunt. Nunc varius nulla quis mauris consequat ornare. Morbi molestie sapien iaculis, scelerisque quam et, convallis sem. Vestibulum sodales, lorem sed lobortis interdum, arcu velit porttitor tortor, ut elementum augue augue malesuada augue. Aliquam blandit lectus tellus, ac condimentum metus consequat sit amet. Donec at egestas velit.
+    include includes/head.pug
+    body
+        include includes/header.pug
 
-    //- script( src = 'https://apis.google.com/js/api.js' )
-    script( src = '../js/main.js' )
+        #wraper.home
+            .section#home-home
+                #homeSlideShow.jsmodule(data-classname = "ThreeSlideShow")
+            .section#home-evolving
+                .inner
+                    .body
+                        | INDIANA IS A #[span.greenColor MODULAR SYSTEM ],
+                        | EVOLVING FURNITURE CAPABLE FOR ALL SPACES. 
+                        | #[span.blueColor LIVING ROOM ], #[span.redColor BEDROOM ],
+                        | #[span.greenColor OffICE ] AND #[span.blueColor RETAIL PURPOSES. ]
+                        | LEARN HOW TO MAKE YOUR OWN INDIANA
+                        | WITH OUR #[span.redColor SIMULATOR ]
+            .section#home-modular
+                .title Modular System
+                .inner
+                    .image
+                    .body.clearfix
+                        p
+                            | Customize Indiana online : follow your guts to select every part of your new match.
+                            | Every piece of this furniture is handcrafted with beautiful Colombian wood and metallic complements
+                            | made in Spain, combining traditionial manufacturing with modern design.
+                        p
+                            | Enjoy the verstaile piece at home or office: Indiana is a timeless solution. Need a change?
+                            | Change your perspective! This is furniture for keeping : transform your piece in a new one by varying its
+                            | position or by adding new elements.
+            .section#home-collections
+                .title Collections
+                .inner
+                    .carousel.jsmodule(data-classname = "Carousel")
+                        img( src="../assets/modularSystems.jpg" )
+                        img( src="../assets/modularSystems.jpg" )
+                        img( src="../assets/modularSystems.jpg" )
+                        img( src="../assets/modularSystems.jpg" )
+                        img( src="../assets/modularSystems.jpg" )
+            .section#home-simulator
+                .title Build your indiana
+                .inner
+                    .body
+                        | SIMULATOR
+        include includes/footer.pug
+        script( src = '../js/main.js' )

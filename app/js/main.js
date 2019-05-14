@@ -1,23 +1,32 @@
 import Menu from './nodes/Menu'
-import Footer from './nodes/Footer'
-import Header from './nodes/Header'
-import ThreeLayer from './nodes/ThreeLayer'
+import Carousel from './nodes/Carousel'
+import ThreeSlideShow from './nodes/ThreeSlideShow'
+
+const classes = {
+    Menu,
+	ThreeSlideShow,
+	Carousel
+};
+
+class Proxy {
+    constructor (className, opts) {
+        return new classes[className](opts);
+    }
+}
 
 class Main{
 	constructor(){
-	this.node = window
-	
-	window.addEventListener( 'mousemove', this.mouseMove.bind( this ), false )
-	window.addEventListener( 'mousedown', this.mouseDown.bind( this ), false )
-	window.addEventListener( 'resize', this.resize.bind( this ), false )
-	window.addEventListener( 'scroll', this.scroll.bind( this ), false )
-	
-	this.views = {
-	    threeLayer : new ThreeLayer( document.getElementById('three') ),
-		menu : new Menu( document.getElementById('menu') ),
-		header : new Header( document.getElementById('header') ),
-	    footer : new Footer( document.getElementById('footer') )
-	}
+        this.node = window
+        
+        window.addEventListener( 'mousemove', this.mouseMove.bind( this ), false )
+        window.addEventListener( 'mousedown', this.mouseDown.bind( this ), false )
+        window.addEventListener( 'resize', this.resize.bind( this ), false )
+        window.addEventListener( 'scroll', this.scroll.bind( this ), false )
+        
+        this.views = {}
+		
+		var jsMods = document.getElementsByClassName('jsmodule')
+		Object.values( jsMods ).forEach( v => this.views [ v.dataset.classname ] = new Proxy( v.dataset.classname, v ) )
 
 		this.resize()
 		this.step()

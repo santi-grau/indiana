@@ -4,7 +4,50 @@ html
     body
         include includes/header.pug
 
-        #wraper.collection
+        #wraper.collection.withTitle
+            .section#collection-main
+                .title Collection
+                .inner
+                    .nav
+                        ul.menu.clearfix
+                            li
+                                a( href='javasxcript:void( 0 )') Bedroom
+                            li
+                                a( href='javasxcript:void( 0 )') Living room
+                            li
+                                a( href='javasxcript:void( 0 )') Others
+                            li
+                                a( href='javasxcript:void( 0 )') Office
+                            li
+                                a( href='javasxcript:void( 0 )') Retail
+                    .collection
+                        .title BEDROOM
+                        p
+                            | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vitae sem in sem vestibulum pulvinar. Nullam pretium porta tempor. Nunc in ornare augue. Ut in ligula nunc. Proin at elit eget turpis pretium molestie vitae non mauris. Maecenas sodales fermentum ipsum, quis aliquam nibh.
+                        p
+                            | Suspendisse vehicula massa vel mollis volutpat. Aenean lobortis scelerisque urna, sit amet sagittis orci rutrum id. Orci dignissim laoreet id bibendum leo. Curabitur condimentum pellentesque orci bibendum convallis. Curabitur libero nibh, consequat non malesuada sed, sodales eu elit. Vivamus iaculis pharetra dolor vitae condimentum.
+                        .carousel.jsmodule(data-classname = "Carousel")
+                            img( src="../assets/modularSystems.jpg" )
+                            img( src="../assets/modularSystems.jpg" )
+                            img( src="../assets/modularSystems.jpg" )
+                            img( src="../assets/modularSystems.jpg" )
+                            img( src="../assets/modularSystems.jpg" )
+                        .imgContainer.double.clearfix
+                            img.leftCol( src="../assets/modularSystemsV.jpg" )
+                            img.rightCol( src="../assets/modularSystemsV.jpg" )
+                    .collection
+                        .title LIVING ROOM
+                        p
+                            | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vitae sem in sem vestibulum pulvinar. Nullam pretium porta tempor. Nunc in ornare augue. Ut in ligula nunc. Proin at elit eget turpis pretium molestie vitae non mauris. Maecenas sodales fermentum ipsum, quis aliquam nibh.
+                        p
+                            | Suspendisse vehicula massa vel mollis volutpat. Aenean lobortis scelerisque urna, sit amet sagittis orci rutrum id. Orci dignissim laoreet id bibendum leo. Curabitur condimentum pellentesque orci bibendum convallis. Curabitur libero nibh, consequat non malesuada sed, sodales eu elit. Vivamus iaculis pharetra dolor vitae condimentum.
+                        .imgContainer.center
+                            img( src="../assets/modularSystemsV.jpg" )
+                        .imgContainer
+                            img.left( src="../assets/modularSystemsV.jpg" )
+                        .imgContainer.right
+                            img( src="../assets/modularSystemsV.jpg" )
+                        
 
         include includes/footer.pug
-        script( src = '../js/home.js' )
+        script( src = '../js/main.js' )

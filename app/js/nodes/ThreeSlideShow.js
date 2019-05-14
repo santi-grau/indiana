@@ -1,7 +1,6 @@
-import {  Vector2, WebGLRenderer, Scene, OrthographicCamera, Object3D, Texture, sRGBEncoding, MeshMatcapMaterial,MeshBasicMaterial, ShaderMaterial, MeshStandardMaterial, CubeTextureLoader, TextureLoader } from 'three'
+import {  Vector2, WebGLRenderer, Scene, OrthographicCamera, Object3D, ShaderMaterial, MeshStandardMaterial, CubeTextureLoader, TextureLoader } from 'three'
 
 import cubemap from '../../assets/cubemap/*.jpg'
-
 import GLTFLoader from 'three-gltf-loader'
 import model from '../../assets/ani/ani.gltf'
 import normals from '../../assets/ani/png/*.png'
@@ -9,7 +8,7 @@ import texs from '../../assets/ani/jpg/*.jpg'
 import lms from '../../assets/lightmaps/*.jpg'
 import shadows from '../../assets/shadow/*.png'
 
-class ThreeLayer {
+class ThreeSlideShow {
 	constructor( node ){
         this.node = node
 
@@ -92,9 +91,7 @@ class ThreeLayer {
                         s.flipY = false
                         this.plane = c
                         c.material = new ShaderMaterial( {
-                            uniforms: {
-                                tex: { value: s }
-                            },
+                            uniforms: { tex: { value: s } },
                             vertexShader: 'varying vec2 vUv; void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }',
                             fragmentShader: 'uniform sampler2D tex; varying vec2 vUv; void main() { vec2 uv = vUv; vec4 c = texture2D(tex, uv); uv *=  1.0 - uv.yx; float vig = uv.x*uv.y * 15.0; vig = pow(vig, 2.0); gl_FragColor = vec4( 0.0, 0.0, 0.0, c * vig * 0.5  ); }'
                         } );
@@ -162,4 +159,4 @@ class ThreeLayer {
 	}
 }
 
-export { ThreeLayer as default }
+export { ThreeSlideShow as default }
