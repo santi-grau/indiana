@@ -1,8 +1,10 @@
+import Header from './nodes/Header'
 import Menu from './nodes/Menu'
 import Carousel from './nodes/Carousel'
 import ThreeSlideShow from './nodes/ThreeSlideShow'
 
 const classes = {
+	Header,
     Menu,
 	ThreeSlideShow,
 	Carousel

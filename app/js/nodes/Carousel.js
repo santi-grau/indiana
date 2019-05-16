@@ -7,11 +7,6 @@ class Carousel {
         this.imgs = []
         this.currentImage = 0
 
-        // bottom markers
-        this.markers = document.createElement( 'div' )
-        this.markers.className = 'markers'
-        this.node.appendChild( this.markers )
-
         // left but
         this.leftBut = document.createElement( 'a' )
         this.leftBut.setAttribute( 'href', 'javascript:void(0)' )
@@ -41,19 +36,12 @@ class Carousel {
             this.imgs.push( img )
             img.parentNode.removeChild( img )
 
-            var marker = document.createElement( 'a' )
-            marker.className = 'marker'
-            marker.setAttribute( 'href', 'javascript:void(0)' )
-            this.markers.appendChild( marker )
-
             var im = document.createElement( 'div' )
             im.className = 'img'
             this.slider.appendChild( im )
             im.style['background-image'] = 'url(' + img.getAttribute( 'src' ) + ')'
             
         })
-
-        this.markers.childNodes[ this.currentImage ].classList.add( 'active' )
 	}
 
     prevImage( e ){
@@ -67,9 +55,6 @@ class Carousel {
     }
 
     updateSlider( ){
-        Object.values( this.markers.childNodes ).forEach( marker => marker.classList.remove( 'active' ) )
-        this.markers.childNodes[ this.currentImage ].classList.add( 'active' )
-        console.log( this.currentImage )
         this.slider.style.transform = 'translate3d( ' + -this.currentImage * this.node.offsetWidth + 'px, 0px, 0px )'
     }
 
