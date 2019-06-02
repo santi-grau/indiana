@@ -18,7 +18,10 @@
         margin 0px auto
         transform-origin 50% 0
         &#titleWhite
+            z-index 1000
             background url('../assets/logo_white.svg') 100% 100% no-repeat
+            background-position center top
+            background-size contain
             display none
         
     #share
@@ -48,8 +51,8 @@
             z-index 100
             display none
             position absolute
-            top 20px
-            right 20px
+            top 23px
+            left 23px
             width 20px
             height 20px
             background url('../assets/hamburger.svg') 100% 100% no-repeat
@@ -87,3 +90,37 @@
                     line-height 22px
                     text-decoration none
                     pointer-events auto
+
+@media only screen and (max-width: 768px)
+    #header
+        .title
+            height 42px
+            width 200px
+        #menu
+            #buts
+                display none
+                margin-top 100px
+                li
+                    a
+                        color #ffffff
+            .hamburger
+                display block
+    body.menuMobile
+        #header
+            .title
+                display none
+                &#titleWhite
+                    display block
+            #share
+                z-index 1000
+                .sharebut
+                    &.instagram
+                        background url('../assets/ig_w.svg') 100% 100% no-repeat
+                    &.facebook
+                        background url('../assets/fb_w.svg') 100% 100% no-repeat
+            #menu
+                background #000000
+                #buts
+                    display block
+                .hamburger
+                    background url('../assets/close.svg') 100% 100% no-repeat

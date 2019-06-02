@@ -89,4 +89,61 @@
             font-family indiana
             font-size 107px
             letter-spacing -5px
-        
+
+
+@media only screen and (min-width: 768px) and (max-width: 1280px)
+    .modular-system
+        #modular-intro
+            .inner
+                width 708px
+                .body
+                    float none
+                    width 100%
+                .image
+                    float none
+                    height auto
+                    margin-bottom 50px
+                    width 100%
+                    height 490px
+        #modular-transform
+            .inner
+                width 768px
+                .grid
+                    .block
+                        width 240px
+                        margin-right 24px
+                        &:nth-child(4n+4)
+                            margin-right 24px
+                        &:nth-child(3n+3)
+                            margin-right 0px
+
+@media only screen and (max-width: 768px)
+    .modular-system
+        #modular-intro
+            .inner
+                width 90%
+                .body
+                    float none
+                    width 100%
+                .image
+                    float none
+                    height auto
+                    margin-bottom 50px
+                    width 100%
+                    height 60vw
+        #modular-transform
+            .inner
+                width 100%
+                .grid
+                    .block
+                        width 50%
+                        margin-right 0px !important
+                        pointer-events none
+                        .legend
+                            font-size 19px
+                            margin-top 22px
+                            text-align center
+         #modular-simulator
+            .body
+                font-size 70px
+                letter-spacing -1px

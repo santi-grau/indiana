@@ -94,3 +94,35 @@
                         background #000000
                         color #ffffff
                         animation blinkBut 0.4s linear infinite
+
+@media only screen and (min-width: 768px) and (max-width: 1280px)
+    #footer
+        .inner
+            width 700px
+            .col
+                width 50%
+                float left
+                &.information
+                    margin-right 0
+                &.newsletter
+                    clear both
+                    width 700px
+                    margin-top 30px
+
+@media only screen and (max-width: 768px)
+    #footer
+        .inner
+            font-size 20px
+            line-height 23px
+            padding 72px 0
+            .col
+                clear both
+                margin-bottom 20px
+                .topLevel
+                    margin-bottom 0px
+                &.newsletter
+                    clear both
+                    width 100%
+                    .inputField
+                        input
+                            font-size 18px

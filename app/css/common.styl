@@ -47,7 +47,7 @@ img.rightCol
 .imgContainer.left
     text-align left
     img
-        width 410px
+        width calc( 50% - 10px )
 
 .imgContainer.left ~ .imgContainer.right
     position relative
@@ -60,7 +60,7 @@ img.rightCol
 .imgContainer.right
     text-align right
     img
-        width 410px
+        width calc( 50% - 10px )
 
 
 
@@ -108,3 +108,90 @@ img.rightCol
                 width 860px
                 background-repeat no-repeat
                 background-size cover
+
+@media only screen and (min-width: 768px) and (max-width: 1280px)
+    .carousel
+        width 500px
+        height 385px
+        &> .nav
+            width 50px
+            height 50px
+            &.left 
+                left -100px
+            &.right 
+                right -100px
+        .outer
+            .slider
+                .img
+                    width 500px
+                    height 385px
+                
+    #wraper
+        .section
+            .inner
+                width 760px
+
+@media only screen and (max-width: 768px)
+    #simBut
+        display none
+    #wraper
+        &.withTitle
+            padding-top 70px
+        .section
+            .inner
+                width 100vw
+                padding 60px 0 50px
+                margin 0px auto
+            &> .title
+                text-align center
+                font-size 28px
+                position relative
+                top 35px
+    p
+        font-size 19px
+        line-height 22px
+    
+    .carousel
+        width 100vw
+        height 100vw
+        &> .nav
+            width 30px
+            height 30px
+            &.left 
+                left 10px
+            &.right 
+                right 10px
+        .outer
+            .slider
+                .img
+                    width 100vw
+                    height 100vw
+    img.leftCol
+        width 100%
+
+    img.rightCol
+        width 100%
+
+    .imgContainer
+        margin-bottom 20px
+
+    .imgContainer.center
+        text-align center
+
+    .imgContainer.left
+        text-align left
+        img
+            width 100%
+
+    .imgContainer.left ~ .imgContainer.right
+        position relative
+        top 0
+
+    .imgContainer.right ~ .imgContainer.left
+        position relative
+        top 0px
+
+    .imgContainer.right
+        text-align right
+        img
+            width 100%
