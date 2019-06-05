@@ -139,7 +139,6 @@ class Base extends Object3D {
 class Item {
     constructor( type, mesh ){
         this.type = type
-        this.placing = true
         switch ( type ) {
             case 'mbox':
                 this.obj = new Mbox( )
@@ -179,6 +178,12 @@ class Item {
             matcap: tex
         } );
 
+        mesh.userData = {
+            type : 'item'
+        }
+
+        this.id = mesh.uuid
+
         mesh.geometry.computeBoundingBox()
 
         this.obj.init && this.obj.init()
@@ -188,7 +193,7 @@ class Item {
         this.colliders = new Object3D()
         this.obj.add( this.colliders )
         this.obj.createColliders && this.obj.createColliders()
-        console.log('placed')
+        
     }
 
     step( time ){

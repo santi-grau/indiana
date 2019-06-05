@@ -112,8 +112,8 @@ html
                                 a.mod( href='javascript:void(0)', data-mod='s13', data-type='pillow', data-size='3x1') 3x1
             #colorSwap.rounded Color
             #zoom
-                #plusZoom.rounded +
-                #minusZoom.rounded -
+                #plusZoom.rounded( data-zoom = 'in' ) +
+                #minusZoom.rounded( data-zoom = 'out' ) -
         
         include includes/footer.pug
         script( src = '../js/simulator.js' )

@@ -1,4 +1,13 @@
-import {  Vector2, Vector3, WebGLRenderer, Scene, OrthographicCamera, Raycaster, AxesHelper, Object3D, DirectionalLight, PCFSoftShadowMap } from 'three'
+// ----------> OK ----------> Zoom in/out de l'escenari (he fet mostra al INDD del link)
+// ----------> OK ----------> Afegir una mica més de rotació de l'escenari. 
+// ----------> OK ----------> Poder esborrar elements de la llista de la columna dreta
+// ----------> OK ----------> Poder fer drag n drop amb els elements flotants al mig de l'escenari.
+// — Ojo, menu DRETA falten poder AFEGIR PORTES.
+// — Color
+// — Export config
+// — Export
+
+import {  Vector2, Vector3, WebGLRenderer, Scene, OrthographicCamera, Raycaster, Object3D } from 'three'
 
 import Item from './modules/Item'
 import Room from './modules/Room'
@@ -22,6 +31,10 @@ class Simulator{
 		var titles = document.getElementsByClassName('title')
 		for (let title of titles) title.addEventListener('click', this.toggleSection.bind( this ) )
 
+		this.targetZoom = 40
+		var zooms = document.getElementById('zoom').getElementsByClassName('rounded')
+		for (let zoom of zooms) zoom.addEventListener('click', this.toggleZoom.bind( this ) )
+
         this.scene = new Scene()
 		this.camera = new OrthographicCamera()
 		// this.scene.add( new AxesHelper(10))
@@ -39,9 +52,15 @@ class Simulator{
         
 		window.addEventListener( 'mousemove', this.mouseMove.bind( this ), false )
 		window.addEventListener( 'mousedown', this.mouseDown.bind( this ), false )
+		window.addEventListener( 'mouseup', this.mouseUp.bind( this ), false )
 
 		this.resize()
 		this.step()
+	}
+
+	toggleZoom( e ){
+		if( e.currentTarget.dataset.zoom == 'in' ) this.targetZoom = 80
+		if( e.currentTarget.dataset.zoom == 'out' ) this.targetZoom = 40
 	}
 
 	toggleSection( e ){
@@ -66,8 +85,6 @@ class Simulator{
 		item.obj.visible = false
 	}
 
-	
-
 	refreshItemList(){
 		if( this.items.length ) this.itemList.classList.add( 'active' )
 		else this.itemList.classList.remove( 'active' )
@@ -80,6 +97,25 @@ class Simulator{
 			div.classList.add( 'item' )
 			div.innerHTML = item.obj.name
 			this.itemList.appendChild( div )
+
+			var del = document.createElement( 'a' )
+			del.innerHTML = 'x'
+			del.setAttribute( 'href', 'javascript:void(0)')
+			del.classList.add( 'deleteItem' )
+			del.dataset.itemId = item.id
+			div.appendChild( del )
+			del.addEventListener( 'mousedown', this.deleteItem.bind( this ) )
+		})
+	}
+
+	deleteItem( e ){
+		this.items.forEach( ( item, i ) => {
+			if( item.id == e.currentTarget.dataset.itemId ){ 
+				this.root.remove( item.obj )
+				this.items.splice( i, 1 )
+				this.refreshItemList()
+				return
+			}
 		})
 	}
 
@@ -91,7 +127,15 @@ class Simulator{
 	mouseMove( e ){
 		this.mouse = new Vector2( e.clientX / this.node.offsetWidth - 0.5, e.clientY / this.node.offsetHeight - 0.5 )
 		var intersects = this.getIntersects( ( ( e.offsetX ) / this.node.offsetWidth ) * 2 - 1, - ( e.offsetY / this.node.offsetHeight ) * 2 + 1 )
-		
+		document.body.style.cursor = 'default'
+		if( !this.placing ) {
+			if( intersects.length ){
+				if( intersects[0].object.userData && intersects[0].object.userData.type == 'item' ) {
+					document.body.style.cursor = 'grab'
+				}
+			}
+			return
+		}
 		var colliders = []
 		if( intersects.length ) {
 			intersects.forEach( i => {
@@ -108,6 +152,7 @@ class Simulator{
 		}
 
 		if( this.placing && this.active && colliders.length ){
+			document.body.style.cursor = 'grabbing'
 			this.active.obj.visible = true
 			let obj = colliders[0].object
 			let p = colliders[0].point
@@ -140,8 +185,24 @@ class Simulator{
 	}
 
 	mouseDown( e ){
-		if( !this.placing ) return
 		var intersects = this.getIntersects( ( ( e.offsetX ) / this.node.offsetWidth ) * 2 - 1, - ( e.offsetY / this.node.offsetHeight ) * 2 + 1 )
+		if( !this.placing ) {
+			if( intersects.length ){
+				if( intersects[0].object.userData && intersects[0].object.userData.type == 'item' ) {
+					document.body.style.cursor = 'grabbing'
+					this.items.forEach( item => {
+						if( item.id == intersects[0].object.uuid ){ 
+							this.placing = true
+							this.active = item
+							this.room.showGrid()
+						}
+					})
+				}
+			}
+			return
+		}
+		
+
 		if( intersects.length ) {
 			this.items.push( this.active )
 			this.active.place()
@@ -152,6 +213,15 @@ class Simulator{
 		this.room.resetGrid()
 	}
 
+	mouseUp( ){
+		if( this.placing ){
+			this.placing = false
+			this.active = null
+			this.room.resetGrid()
+			document.body.style.cursor = 'grab'
+		}
+	}
+
 	resize( ){
         let [ width, height ] = [ this.node.offsetWidth, this.node.offsetHeight ]
 		this.renderer.setSize( width, height )
@@ -160,7 +230,7 @@ class Simulator{
         for ( var prop in camView ) this.camera[ prop ] = camView[ prop ]
         this.camera.position.z = 1000
 		
-		this.camera.zoom = 40
+		this.camera.zoom = this.targetZoom
 		this.camera.position.set( -20, 12, 20 )
 		this.camera.lookAt( new Vector3( 0, 0, 0 ) )
 		this.camera.updateProjectionMatrix( )
@@ -171,8 +241,11 @@ class Simulator{
 		this.room && this.room.step( time )	 
 		this.renderer.render( this.scene, this.camera )
 
-		this.orbitGroup.rotation.y += ( ( -Math.PI / 16 * this.mouse.x ) - this.orbitGroup.rotation.y ) * 0.05
-        // this.orbitGroup.rotation.x += ( ( -Math.PI / 16 * this.mouse.y ) - this.orbitGroup.rotation.x ) * 0.05
+		this.camera.zoom += ( this.targetZoom - this.camera.zoom ) * 0.1
+		this.camera.updateProjectionMatrix( )
+
+		this.orbitGroup.rotation.y += ( ( -Math.PI / 8 * this.mouse.x ) - this.orbitGroup.rotation.y ) * 0.05
+        // this.orbitGroup.rotation.x += ( ( -Math.PI / 32 * this.mouse.y ) - this.orbitGroup.rotation.x ) * 0.05
 	}
 }
 
