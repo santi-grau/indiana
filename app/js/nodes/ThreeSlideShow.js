@@ -11,6 +11,13 @@ import shadows from '../../assets/shadow/*.png'
 class ThreeSlideShow {
 	constructor( node ){
         this.node = node
+        
+        this.active = true
+        const style = getComputedStyle( this.node )
+        if( style.opacity == 0 ) {
+            this.active = false
+            return
+        }
 
         this.mouse = new Vector2( 0, 0 )
         this.refDimension = 375
@@ -103,6 +110,7 @@ class ThreeSlideShow {
     }
 
     updateBlocks( p ){
+        if( !this.active ) return
         var ani = ['b0','b1','b2','b3','B4','B5','B6','B7','B8','B9','B10','B11','B12','B13','c1Bake','c2Bake','c3Bake', 'dBake']
         
         let blocks = this.inner.children
@@ -132,11 +140,13 @@ class ThreeSlideShow {
     }
 
     mouseMove( e ){
+        if( !this.active ) return
         this.mouse = new Vector2( e.clientX / this.node.offsetWidth - 0.5, e.clientY / this.node.offsetHeight - 0.5 )
         this.updateBlocks( this.mouse.x )
     }
 
     resize( width, height ){
+        if( !this.active ) return
         this.renderer.setSize( width, height )
 		this.renderer.setPixelRatio( 2 )
         var camView = { left :  width / -2, right : width / 2, top : height / 2, bottom : height / -2 }
@@ -152,6 +162,7 @@ class ThreeSlideShow {
     }
 
 	step( time ){
+        if( !this.active ) return
         this.renderer.render( this.scene, this.camera )
 
         this.orbitGroup.rotation.y += ( ( -Math.PI / 3 * this.mouse.x ) - this.orbitGroup.rotation.y ) * 0.1
