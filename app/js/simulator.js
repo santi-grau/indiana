@@ -1,12 +1,3 @@
-// ----------> OK ----------> Zoom in/out de l'escenari (he fet mostra al INDD del link)
-// ----------> OK ----------> Afegir una mica més de rotació de l'escenari. 
-// ----------> OK ----------> Poder esborrar elements de la llista de la columna dreta
-// ----------> OK ----------> Poder fer drag n drop amb els elements flotants al mig de l'escenari.
-// — Ojo, menu DRETA falten poder AFEGIR PORTES.
-// — Color
-// — Export config
-// — Export
-
 import {  Vector2, Vector3, WebGLRenderer, Scene, OrthographicCamera, Raycaster, Object3D } from 'three'
 
 import Item from './modules/Item'
@@ -23,7 +14,10 @@ class Simulator{
         this.renderer = new WebGLRenderer( { alpha : true, antialias : true } )
 		this.node.appendChild( this.renderer.domElement )
 		this.raycaster = new Raycaster()
-		
+
+		document.getElementById('colorSwap').addEventListener( 'mousedown', this.swapColor.bind( this ) )
+		this.currentColor = null
+
 		this.items = []
 		this.itemList = document.getElementById('items')
 		this.active = null
@@ -56,6 +50,14 @@ class Simulator{
 
 		this.resize()
 		this.step()
+		this.swapColor()
+	}
+
+	swapColor( ){
+		var newColor = Math.floor( Math.random() * 5 )
+		while( newColor == this.currentColor ) newColor = Math.floor( Math.random() * 5 )
+		this.currentColor = newColor
+		this.node.className = 'color' + this.currentColor
 	}
 
 	toggleZoom( e ){
@@ -76,6 +78,8 @@ class Simulator{
 	}
 
 	addModule( e ){
+		if( e.target.dataset.type == 'zbox' ) this.openOptions( 'doorOptions' );
+		if( e.target.dataset.type == 'modOption' ) return this.addOption( e );
 		this.room.showGrid()
 		var mod = this.modules[ e.target.dataset.mod ].clone()
 		var item = new Item( e.target.dataset.type, mod )
@@ -83,6 +87,40 @@ class Simulator{
 		this.active = item
 		this.placing = true
 		item.obj.visible = false
+	}
+
+	openOptions( id ){
+		document.getElementById( id ).classList.add( 'active' )
+	}
+
+	closeOptions( ){
+		var modOptions = document.getElementsByClassName( 'modOptions' )
+		for (let option of modOptions) option.classList.remove( 'active' )
+	}
+
+	addOption( e ){
+		var mod = this.modules[ 'f' + this.active.dims ].clone()
+		var item = new Item( 'cover', mod )
+		this.active.obj.add( item.obj )
+
+		switch ( e.currentTarget.dataset.optionsettings ) {
+            case 'left':
+                item.obj.rotation.y = -Math.PI / 16
+                break
+            case 'right':
+				item.obj.rotation.y = Math.PI / 16 + Math.PI
+				item.obj.position.x += this.active.obj.children[0].geometry.boundingBox.max.x
+                break
+            case 'top':
+				item.obj.rotation.x = -Math.PI / 16 + Math.PI
+				item.obj.position.y += this.active.obj.children[0].geometry.boundingBox.max.y
+                break
+            case 'bottom':
+                item.obj.rotation.x = Math.PI / 16
+                break
+            default : console.log('No module type found')
+		}
+		
 	}
 
 	refreshItemList(){
@@ -185,6 +223,7 @@ class Simulator{
 	}
 
 	mouseDown( e ){
+		if( e.srcElement.classList.contains( 'modOption' ) ) return
 		var intersects = this.getIntersects( ( ( e.offsetX ) / this.node.offsetWidth ) * 2 - 1, - ( e.offsetY / this.node.offsetHeight ) * 2 + 1 )
 		if( !this.placing ) {
 			if( intersects.length ){
@@ -211,9 +250,11 @@ class Simulator{
 		this.placing = false
 		this.active = null
 		this.room.resetGrid()
+		this.closeOptions()
 	}
 
-	mouseUp( ){
+	mouseUp( e ){
+		if( e.srcElement.classList.contains( 'modOption' ) ) return
 		if( this.placing ){
 			this.placing = false
 			this.active = null

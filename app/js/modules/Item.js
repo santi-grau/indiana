@@ -167,6 +167,8 @@ class Item {
             default : console.log('No module type found')
         }
 
+        this.dims = mesh.name.substring(1)
+
         this.obj.add( mesh )
         mesh.position.set( 0, 0, 0 )
 
@@ -192,8 +194,7 @@ class Item {
     place( ){
         this.colliders = new Object3D()
         this.obj.add( this.colliders )
-        this.obj.createColliders && this.obj.createColliders()
-        
+        this.obj.createColliders && this.obj.createColliders()   
     }
 
     step( time ){
