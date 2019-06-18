@@ -2,12 +2,12 @@ TODO
 --
 
 - [ ] Export config
-- [ ] Export
 - [ ] CMS
-- [ ] Footer
-- [ ] OJO! SIMULATOR: acabar d'ajustar mides de text i aliniació del textos 
-- [ ] Modals
 
+- [x] OJO! SIMULATOR: acabar d'ajustar mides de text i aliniació del textos 
+- [x] Hover simulator
+- [x] Footer
+- [x] Modals
 - [x] Foto a la home mobil
 - [x] Imatges Carrousels proporció. 861x572px
 - [x] OJO! COLLECTION: Menu amb Anchors no funciona.

@@ -6,14 +6,14 @@ html
         
         #wraper.simulator
             #threeLayer
-            #items Items
+            #items
             #menu
                 .block
                     a( href='javascript:void(0)').title Structure (mbox)
                     .collapsible
                         .inner
                             .info
-                                | Mod info
+                                | Choose the propotions and set your indiana framework ontion pre.
                             .options.clearfix
                                 a.mod( href='javascript:void(0)', data-mod='m11', data-type='mbox', data-size='1x1') 1x1
                                 a.mod( href='javascript:void(0)', data-mod='m21', data-type='mbox', data-size='2x1') 2x1
@@ -30,7 +30,7 @@ html
                     .collapsible
                         .inner
                             .info
-                                | Mod info
+                                | Choose the propotions and set your indiana framework ontion pre.
                             .options.clearfix
                                 a.mod( href='javascript:void(0)', data-mod='z11', data-type='zbox', data-size='1x1') 1x1
                                 a.mod( href='javascript:void(0)', data-mod='z21', data-type='zbox', data-size='2x1') 2x1
@@ -52,7 +52,7 @@ html
                     .collapsible
                         .inner
                             .info
-                                | Mod info
+                                | Choose the propotions and set your indiana framework ontion pre.
                             .options.clearfix
                                 a.mod( href='javascript:void(0)', data-mod='b11', data-type='base', data-size='1x1') 1x1
                                 a.mod( href='javascript:void(0)', data-mod='b12', data-type='base', data-size='2x1') 2x1
@@ -62,7 +62,7 @@ html
                     .collapsible
                         .inner
                             .info
-                                | Mod info
+                                | Choose the propotions and set your indiana framework ontion pre.
                             .options.clearfix
                                 a.mod( href='javascript:void(0)', data-mod='f11', data-type='cover', data-size='1x1') 1x1
                                 a.mod( href='javascript:void(0)', data-mod='f21', data-type='cover', data-size='2x1') 2x1
@@ -79,7 +79,7 @@ html
                     .collapsible
                         .inner
                             .info
-                                | Mod info
+                                | Choose the propotions and set your indiana framework ontion pre.
                             .options.clearfix
                                 a.mod( href='javascript:void(0)', data-mod='l11', data-type='side', data-size='1x1') 1x1
                                 a.mod( href='javascript:void(0)', data-mod='l12', data-type='side', data-size='2x1') 2x1
@@ -89,7 +89,7 @@ html
                     .collapsible
                         .inner
                             .info
-                                | Mod info
+                                | Choose the propotions and set your indiana framework ontion pre.
                             .options.clearfix
                                 a.mod( href='javascript:void(0)', data-mod='s11', data-type='shelf', data-size='1x1') 1x1
                                 a.mod( href='javascript:void(0)', data-mod='s12', data-type='shelf', data-size='2x1') 2x1
@@ -99,27 +99,31 @@ html
                     .collapsible
                         .inner
                             .info
-                                | Mod info
+                                | Choose the propotions and set your indiana framework ontion pre.
                             .options.clearfix
                                 a.mod( href='javascript:void(0)', data-mod='d11', data-type='drawer', data-size='1x1') 1x1
                                 a.mod( href='javascript:void(0)', data-mod='d21', data-type='drawer', data-size='2x1') 2x1
                                 a.mod( href='javascript:void(0)', data-mod='d31', data-type='drawer', data-size='3x1') 3x1
                                 a.mod( href='javascript:void(0)', data-mod='d22', data-type='drawer', data-size='2x2') 2x2
-                .block
+                .block.last
                     a( href='javascript:void(0)').title Pillows
                     .collapsible
                         .inner
                             .info
-                                | Mod info
+                                | Choose the propotions and set your indiana framework ontion pre.
                             .options.clearfix
                                 a.mod( href='javascript:void(0)', data-mod='s11', data-type='pillow', data-size='1x1') 1x1
                                 a.mod( href='javascript:void(0)', data-mod='s12', data-type='pillow', data-size='2x1') 2x1
                                 a.mod( href='javascript:void(0)', data-mod='s13', data-type='pillow', data-size='3x1') 3x1
+                
+                .dlBlock
+                    a.dlBut#download( href='javascript:void(0)') Proceed and Download PDF
             #colorSwap.rounded Color
             #zoom
                 #plusZoom.rounded( data-zoom = 'in' ) +
                 #minusZoom.rounded( data-zoom = 'out' ) -
         
         include includes/footer.pug
+        script( src='https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js' )
         script( src = '../js/simulator.js' )
         script( src = '../js/main.js' )

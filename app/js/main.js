@@ -1,5 +1,6 @@
 import Header from './nodes/Header'
 import Menu from './nodes/Menu'
+import SimModule from './nodes/SimModule'
 import Carousel from './nodes/Carousel'
 import ThreeSlideShow from './nodes/ThreeSlideShow'
 
@@ -7,7 +8,8 @@ const classes = {
 	Header,
     Menu,
 	ThreeSlideShow,
-	Carousel
+	Carousel,
+	SimModule
 };
 
 class Proxy {
@@ -29,6 +31,10 @@ class Main{
 		
 		var jsMods = document.getElementsByClassName('jsmodule')
 		Object.values( jsMods ).forEach( v => this.views [ v.dataset.classname ] = new Proxy( v.dataset.classname, v ) )
+
+		Array.from( document.getElementsByClassName( 'but' ) ).forEach( e => {
+            if( window.location.href.indexOf("localhost") >= 0 ) e.setAttribute( 'href', e.getAttribute('href') + '.html' )
+        })
 
 		this.resize()
 		this.step()

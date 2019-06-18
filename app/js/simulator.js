@@ -1,5 +1,4 @@
 import {  Vector2, Vector3, WebGLRenderer, Scene, OrthographicCamera, Raycaster, Object3D } from 'three'
-
 import Item from './modules/Item'
 import Room from './modules/Room'
 
@@ -15,6 +14,7 @@ class Simulator{
 		this.node.appendChild( this.renderer.domElement )
 		this.raycaster = new Raycaster()
 
+		document.getElementById('download').addEventListener( 'mousedown', this.download.bind( this ) )
 		document.getElementById('colorSwap').addEventListener( 'mousedown', this.swapColor.bind( this ) )
 		this.currentColor = null
 
@@ -51,6 +51,17 @@ class Simulator{
 		this.resize()
 		this.step()
 		this.swapColor()
+	}
+
+	download( ){
+		// Landscape export, 2×4 inches
+		var doc = new jsPDF({
+			orientation: 'portrait',
+			unit: 'mm'
+		})
+		
+		doc.text('Hello world!', 10, 10)
+		doc.save('a4.pdf')
 	}
 
 	swapColor( ){
@@ -137,7 +148,6 @@ class Simulator{
 			this.itemList.appendChild( div )
 
 			var del = document.createElement( 'a' )
-			del.innerHTML = 'x'
 			del.setAttribute( 'href', 'javascript:void(0)')
 			del.classList.add( 'deleteItem' )
 			del.dataset.itemId = item.id

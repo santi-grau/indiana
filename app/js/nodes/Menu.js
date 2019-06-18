@@ -10,7 +10,6 @@ class Menu {
             e.addEventListener( 'mouseenter', this.mouseEnter.bind( this ) )
             e.addEventListener( 'mouseleave', this.mouseLeave.bind( this ) )
             e.addEventListener( 'mousedown', this.butDown.bind( this ) )
-            if( window.location.href.indexOf("localhost") >= 0 ) e.setAttribute( 'href', e.getAttribute('href') + '.html' )
         })
 
         this.hamburger.addEventListener( 'mousedown' , this.openMenu.bind( this ) )

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "rm -rf dist/* && rm -rf cache && parcel app/views/*.pug --no-hmr",
+    "start": "rm -rf dist/* && rm -rf cache && code ./ && parcel app/views/*.pug --no-hmr",
     "build": "rm -rf docs && parcel build app/views/*.pug --no-source-maps --out-dir docs --public-url '.'"
   },
   "keywords": [],
@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "i": "^0.3.6",
+    "jspdf": "^1.5.3",
     "modules": "^0.4.0",
     "npm": "^6.8.0",
     "orbit-controls-es6": "^2.0.0",
