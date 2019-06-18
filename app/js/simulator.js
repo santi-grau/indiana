@@ -4,13 +4,14 @@ import Room from './modules/Room'
 
 import model from '../assets/modules.gltf'
 import GLTFLoader from 'three-gltf-loader'
+import logo from '../assets/logo.svg'
 
 class Simulator{
 	constructor(){
         this.node = document.getElementById('threeLayer')
 		this.modules = {}
 		this.mouse = new Vector2( 0, 0 )
-        this.renderer = new WebGLRenderer( { alpha : true, antialias : true } )
+        this.renderer = new WebGLRenderer( { alpha : true, antialias : true, preserveDrawingBuffer: true } )
 		this.node.appendChild( this.renderer.domElement )
 		this.raycaster = new Raycaster()
 
@@ -54,14 +55,68 @@ class Simulator{
 	}
 
 	download( ){
-		// Landscape export, 2×4 inches
+		
 		var doc = new jsPDF({
 			orientation: 'portrait',
 			unit: 'mm'
 		})
 		
-		doc.text('Hello world!', 10, 10)
-		doc.save('a4.pdf')
+		doc.setFontSize(12)
+		doc.line(10, 148, 130, 148)
+		
+		doc.text('Shopping list', 10, 153)
+
+		var itms = []
+		this.items.forEach( ( item, id ) => { itms.push( item.obj.name ) })
+
+		doc.text( itms, 10, 163)
+
+		doc.line(140, 148, 200, 148)
+		doc.text('Next steps:', 140, 153)
+
+		doc.text(
+		[
+			'1 — Shortly, we are gonna',
+			'send you an estimation and',
+			'shipping conditions to your',
+			'email.',
+			'',
+			'2 — With this document you',
+			'can proceed to order your',
+			'Indiana replying the email ',
+			'or visit our dealers.'
+		], 140, 163)
+
+		doc.text(
+		[
+			'Indiana',
+			'Lorem ipsum, 23',
+			'08018 Barcelona',
+			'',
+			'+34 934 567 890',
+			'info@indiana.design',
+			'indiana.design'
+		], 140, 253)
+
+		var dataUrl = this.renderer.domElement.toDataURL("image/png")
+
+		var ar = this.node.offsetHeight / this.node.offsetWidth
+		doc.addImage(dataUrl, 'PNG', 10, 0, 190, 190 * ar, 'alias', 'MEDIUM', 0)
+
+		var image = new Image()
+		image.src = 'data:image/svg+xml;base64,' + window.btoa(unescape(encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 502 120"><path style="fill:#1F140F;" d="M449.56,11.22h38.64v48.73h-38.64V11.22z M449.56,3.39l-13.58,7.83v105.3h13.58V67.79h38.64v48.73h13.58V3.39H449.56z M413.01,93.2L344.78-0.09l-9.05,5.22v111.39h9.05V26.54L413.01,120l9.05-5.22V3.39h-9.05V93.2z M269.42,11.22h38.64v48.73h-38.64V11.22z M269.42,3.39l-13.58,7.83v105.3h13.58V67.79h38.64v48.73h13.58V3.39H269.42z M228.35,116.52h13.58V3.39h-13.58V116.52z M200.67,71.44c-1.91,13.23-9.4,25.41-20.19,33.77c-4.87,1.74-12.36,3.48-15.84,3.48h-19.32V11.22h4.18c14.27,0,29.07,7.48,38.46,17.93C198.24,40.63,202.94,56.3,200.67,71.44 M214.6,51.25c-1.39-15.14-9.75-28.89-22.1-37.77c-9.23-6.61-20.54-10.1-32.03-10.1h-15.14l-13.58,7.83v105.3h29.76c16.71-9.22,22.8-12.53,29.41-16.71c2.96-1.91,6.09-4.35,8.7-7.14C210.6,81.71,215.99,66.39,214.6,51.25 M108.26,93.2L40.03-0.09l-9.05,5.22v111.39h9.05V26.54L108.26,120l9.05-5.22V3.39h-9.05V93.2z M0,116.52h13.58V3.39H0V116.52z"/></svg>')))
+
+		image.onload = function() {
+			var canvas = document.createElement('canvas')
+			canvas.width = image.width * 2
+			canvas.height = image.height * 2
+			var context = canvas.getContext('2d')
+			context.drawImage(image, 0, 0, image.width * 2, image.height * 2)
+			var im = canvas.toDataURL('image/png')
+			var ar2 = image.height / image.width
+			doc.addImage(im, 'PNG', 49, 10, 112, 112 * ar2, 'alias2', 'MEDIUM', 0)
+			doc.save('a4.pdf')
+		}
 	}
 
 	swapColor( ){
