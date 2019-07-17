@@ -1,8 +1,9 @@
 import {  Vector2, Vector3, WebGLRenderer, Scene, OrthographicCamera, Raycaster, Object3D } from 'three'
 import Item from './modules/Item'
 import Room from './modules/Room'
+import OrbitControls from 'orbit-controls-es6'
 
-import model from '../assets/modules.gltf'
+import model from '../assets/modules2.gltf'
 import GLTFLoader from 'three-gltf-loader'
 import logo from '../assets/logo.svg'
 
@@ -32,6 +33,12 @@ class Simulator{
 
         this.scene = new Scene()
 		this.camera = new OrthographicCamera()
+
+		this.controls = new OrbitControls( this.camera, this.renderer.domElement);
+		this.controls.enableZoom = false
+		this.controls.enableKeys = false
+		// console.log( this.controls )
+
 		// this.scene.add( new AxesHelper(10))
 
 		this.orbitGroup = new Object3D()
@@ -144,7 +151,7 @@ class Simulator{
 	}
 
 	addModule( e ){
-		if( e.target.dataset.type == 'zbox' ) this.openOptions( 'doorOptions' );
+		if( e.target.dataset.type == 'zbox' ) this.openOptions( 'doorOptions', e.target.dataset.size );
 		if( e.target.dataset.type == 'modOption' ) return this.addOption( e );
 		this.room.showGrid()
 		var mod = this.modules[ e.target.dataset.mod ].clone()
@@ -155,8 +162,19 @@ class Simulator{
 		item.obj.visible = false
 	}
 
-	openOptions( id ){
+	openOptions( id, size ){
 		document.getElementById( id ).classList.add( 'active' )
+		document.getElementsByClassName( 'modOption' )[ 0 ].style.display = 'block'
+		document.getElementsByClassName( 'modOption' )[ 1 ].style.display = 'block'
+		switch ( size ) {
+			case '1x1': 
+				document.getElementsByClassName( 'modOption' )[ 1 ].style.display = 'none'
+				break
+			case '2x2': 
+				document.getElementsByClassName( 'modOption' )[ 0 ].style.display = 'none'
+				break
+			default : console.log('Other yo')
+		}
 	}
 
 	closeOptions( ){
@@ -167,26 +185,8 @@ class Simulator{
 	addOption( e ){
 		var mod = this.modules[ 'f' + this.active.dims ].clone()
 		var item = new Item( 'cover', mod )
+		if( this.active.obj.children.length == 2 ) this.active.obj.remove(this.active.obj.children[1])
 		this.active.obj.add( item.obj )
-
-		switch ( e.currentTarget.dataset.optionsettings ) {
-            case 'left':
-                item.obj.rotation.y = -Math.PI / 16
-                break
-            case 'right':
-				item.obj.rotation.y = Math.PI / 16 + Math.PI
-				item.obj.position.x += this.active.obj.children[0].geometry.boundingBox.max.x
-                break
-            case 'top':
-				item.obj.rotation.x = -Math.PI / 16 + Math.PI
-				item.obj.position.y += this.active.obj.children[0].geometry.boundingBox.max.y
-                break
-            case 'bottom':
-                item.obj.rotation.x = Math.PI / 16
-                break
-            default : console.log('No module type found')
-		}
-		
 	}
 
 	refreshItemList(){
@@ -294,6 +294,7 @@ class Simulator{
 			if( intersects.length ){
 				if( intersects[0].object.userData && intersects[0].object.userData.type == 'item' ) {
 					document.body.style.cursor = 'grabbing'
+					this.controls.enabled = false
 					this.items.forEach( item => {
 						if( item.id == intersects[0].object.uuid ){ 
 							this.placing = true
@@ -320,11 +321,14 @@ class Simulator{
 
 	mouseUp( e ){
 		if( e.srcElement.classList.contains( 'modOption' ) ) return
+		this.controls.enabled = true
 		if( this.placing ){
+			
 			this.placing = false
 			this.active = null
 			this.room.resetGrid()
 			document.body.style.cursor = 'grab'
+			
 		}
 	}
 
@@ -350,7 +354,7 @@ class Simulator{
 		this.camera.zoom += ( this.targetZoom - this.camera.zoom ) * 0.1
 		this.camera.updateProjectionMatrix( )
 
-		this.orbitGroup.rotation.y += ( ( -Math.PI / 8 * this.mouse.x ) - this.orbitGroup.rotation.y ) * 0.05
+		// this.orbitGroup.rotation.y += ( ( -Math.PI / 8 * this.mouse.x ) - this.orbitGroup.rotation.y ) * 0.05
         // this.orbitGroup.rotation.x += ( ( -Math.PI / 32 * this.mouse.y ) - this.orbitGroup.rotation.x ) * 0.05
 	}
 }

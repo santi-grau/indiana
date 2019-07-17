@@ -19,7 +19,7 @@
             background #000000
             color #ffffff
     #zoom
-        position fixed
+        position absolute
         bottom 23px
         left 50%
         transform translateX(-50%)
@@ -65,7 +65,9 @@
         top 50%
         transform translateY(-50%)
         width 266px
+        pointer-events none
         .block
+            pointer-events auto
             border-top solid 1px #111111
             padding 5px 0
             &.last

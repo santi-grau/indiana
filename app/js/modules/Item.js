@@ -1,4 +1,4 @@
-import { Object3D, MeshBasicMaterial, BoxGeometry, PlaneGeometry, Vector2, Vector3, Mesh, TextureLoader, MeshMatcapMaterial } from 'three'
+import { Object3D, MeshBasicMaterial, PlaneGeometry, Vector2, Vector3, Mesh, TextureLoader, MeshMatcapMaterial } from 'three'
 
 import matCap from '../../assets/matcap-porcelain-white.jpg'
 
