@@ -30,3 +30,8 @@ TODO
 - [x] Les mateixes mesures per shelfs i side covers 1x1 1x2 1x3 1x4
 - [x] Drawers: miren cap amunt. Només surt la caixa. Les mesures són 0x1, 0x2 1x1 I 1x2 ( No podem fer mitjos moduls, consells )
 - [x] Col·locació de les peces si marxes cap la zona dels menús queden aquests seleccionats
+
+- [x] La relación base-módulo no funciona. no debería instertarse si no posarse encima.
+- [x] Limitaicon vistas
+- [ ] Podríem fer que poses o bé dos calaixos, o be calaix transparent dalt i calaix a baix o calaix dalt i calaix transparent abaix.
+- [x] El botó de procés de compra, i els següents passos no es poden clicar.

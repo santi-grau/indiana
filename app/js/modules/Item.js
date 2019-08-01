@@ -74,6 +74,17 @@ class Zbox extends Object3D {
         super()
         this.name = 'Zbox'
     }
+
+    createColliders(){
+        let bb = this.children[0].geometry.boundingBox
+        let dims = new Vector3( Math.round( bb.max.x - bb.min.x ), Math.round( bb.max.y - bb.min.y ), Math.round( bb.max.z - bb.min.z ) )
+
+        // h top plane
+        var plane = new Collider( new Vector2( dims.x, dims.z ), new Vector3( dims.x / 2, dims.y + 0.01, -dims.z / 2 ), new Vector3( -Math.PI / 2, 0, 0 ) )
+        this.children[1].add( plane )
+        // plane.userData.restrict = [ 'pillow', 'shelf' ]
+        
+    }
 }
 
 class Cover extends Object3D {
@@ -128,11 +139,12 @@ class Base extends Object3D {
     createColliders(){
         let bb = this.children[0].geometry.boundingBox
         let dims = new Vector3( Math.round( bb.max.x - bb.min.x ), bb.max.y - bb.min.y, Math.round( bb.max.z - bb.min.z ) )
-        console.log( dims )
+        
         // h top plane
-        var plane = new Collider( new Vector2( dims.x, dims.z ), new Vector3( dims.x / 2, dims.y, -dims.z / 2 ), new Vector3( -Math.PI / 2, 0, 0 ) )
+        var plane = new Collider( new Vector2( dims.x, dims.z ), new Vector3( dims.x / 2, dims.y - 0.05, -dims.z / 2 ), new Vector3( -Math.PI / 2, 0, 0 ) )
         this.children[1].add( plane )
         plane.userData.snap = { x : 1, y : 0, z : 1 }
+        // plane.userData.restrict = [ 'zbox' ]
     }
 }
 

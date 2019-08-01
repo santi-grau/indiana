@@ -3,7 +3,7 @@ import Item from './modules/Item'
 import Room from './modules/Room'
 import OrbitControls from 'orbit-controls-es6'
 
-import model from '../assets/modules2.gltf'
+import model from '../assets/modules.gltf'
 import GLTFLoader from 'three-gltf-loader'
 import logo from '../assets/logo.svg'
 
@@ -37,7 +37,10 @@ class Simulator{
 		this.controls = new OrbitControls( this.camera, this.renderer.domElement);
 		this.controls.enableZoom = false
 		this.controls.enableKeys = false
-		// console.log( this.controls )
+		this.controls.maxAzimuthAngle = 0
+		this.controls.minAzimuthAngle = -Math.PI / 2
+		this.controls.maxPolarAngle = Math.PI / 2
+		console.log( this.controls )
 
 		// this.scene.add( new AxesHelper(10))
 
@@ -273,16 +276,18 @@ class Simulator{
 			var maxy = Math.round( gPos.y + obj.geometry.boundingBox.max.y - dims.y )
 			var maxz = Math.round( gPos.z + obj.geometry.boundingBox.min.z + dims.z )
 			
-			let position = new Vector3( Math.min( maxx, p.x ),  Math.min( maxy, p.y ) + dims.y * Math.round( n.y ), Math.max( maxz, p.z ) )
+			let position = new Vector3( Math.min( maxx, p.x ),  p.y, Math.max( maxz, p.z ) )
+			
+			// console.log( position )
 			
 			if( obj.userData.snap && obj.userData.snap.x ) position.x = Math.floor( position.x ) + Math.floor( ( position.x - Math.floor( position.x ) ) * obj.userData.snap.x ) / obj.userData.snap.x
 			if( obj.userData.snap && obj.userData.snap.y ) position.y = Math.floor( position.y ) + Math.floor( ( position.y - Math.floor( position.y ) ) * obj.userData.snap.y ) / obj.userData.snap.y
 			if( obj.userData.snap && obj.userData.snap.z ) position.z = Math.floor( position.z ) + Math.ceil( ( position.z - Math.floor( position.z ) ) * obj.userData.snap.z ) / obj.userData.snap.z
 			
 			// if( dims.x > cdims.x ) position.x = Math.round( gPos.x + obj.geometry.boundingBox.min.x )
-			// if( dims.y > cdims.?y ) position.y = Math.round( gPos.y + obj.geometry.boundingBox.min.y )
+			// if( dims.y > cdims.y ) position.y = Math.round( gPos.y + obj.geometry.boundingBox.min.y )
 			// if( dims.z > cdims.z ) position.z = Math.round( gPos.z + obj.geometry.boundingBox.min.z )
-			// console.log( position )
+
 			this.active.obj.position.copy( position )
 		}
 	}
