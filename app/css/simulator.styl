@@ -134,3 +134,90 @@
             background yellowColor
         &.color4
             background burntColor
+
+#formbox
+    position fixed
+    top 100vh
+    opacity 0
+    left 0
+    width 100vw
+    height 100vh
+    z-index 1000
+    transition opacity 0.4s, top 0s 0.4s
+    &.active
+        top 0
+        opacity 1
+        transition opacity 0.4s
+    #overBackground
+        top 0
+        left 0
+        position absolute
+        width 100vw
+        height 100vh
+        background rgba(0,0,0,0.6 )
+    #overcontent
+        text-align center
+        position absolute
+        width 320px
+        padding 40px
+        background #ffffff
+        margin 0 auto
+        left 50%
+        top 50%
+        transform translateX(-50%) translateY(-50%)
+        input
+            font-size 18px
+            font-family dia
+            width 100%
+            height 40px
+            border none
+            border-top solid 1px #000000
+            border-bottom solid 1px #000000
+            &#name
+                border-bottom none
+            &#email
+                margin-bottom 10px
+            &::placeholder
+                color #444444
+            &:focus
+                outline 0
+        .checkbox
+            text-align left
+            margin-top 30px
+            .check
+                width 20px
+                height 20px
+                border solid 1px #000000
+                float left
+                margin-right 10px
+                position relative
+                &.active
+                    &:before, &:after
+                        display block
+                &:before, &:after
+                    position absolute
+                    display none
+                    top -4px
+                    left 9px
+                    content ' '
+                    height 28px
+                    width 1px
+                    background-color #000
+                &:before
+                    transform rotate(45deg)
+                    left 10px
+                &:after
+                    transform rotate(-45deg)
+        #sendbut
+            pointer-events none
+            display inline-block
+            background #666666
+            color #ffffff
+            padding 20px
+            margin-top 30px
+            width 50%
+            text-decoration none
+            &.active
+                pointer-events auto
+                background #000000
+

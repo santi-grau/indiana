@@ -16,6 +16,7 @@
     "stylus": "*"
   },
   "dependencies": {
+    "event-emitter-es6": "^1.1.5",
     "i": "^0.3.6",
     "jspdf": "^1.5.3",
     "modules": "^0.4.0",

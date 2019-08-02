@@ -127,7 +127,19 @@ html
             #zoom
                 #plusZoom.rounded( data-zoom = 'in' ) +
                 #minusZoom.rounded( data-zoom = 'out' ) -
-        
+        #formbox
+            #overBackground
+            #overcontent
+                input#name( type="text", placeholder="Name" )
+                input#email( type="text", placeholder="Email" )
+                .checkbox.clearfix
+                    .check
+                    span Accept privacy policy terms  #[br] #[a(href="terms") see legal terms] 
+                .checkbox.clearfix
+                    .check
+                    span Subscribe to the newsletter    
+                a#sendbut( href="javascript:void(0)") Send
+                
         include includes/footer.pug
         script( src='https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js' )
         script( src = '../js/simulator.js' )

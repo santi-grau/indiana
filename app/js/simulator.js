@@ -1,6 +1,7 @@
 import {  Vector2, Vector3, WebGLRenderer, Scene, OrthographicCamera, Raycaster, Object3D } from 'three'
 import Item from './modules/Item'
 import Room from './modules/Room'
+import Formbox from './nodes/Formbox'
 import OrbitControls from 'orbit-controls-es6'
 
 import model from '../assets/modules.gltf'
@@ -16,6 +17,8 @@ class Simulator{
 		this.node.appendChild( this.renderer.domElement )
 		this.raycaster = new Raycaster()
 
+		this.formbox = new Formbox()
+		this.formbox.emitter.on('send', () => this.sendForm() )
 		document.getElementById('download').addEventListener( 'mousedown', this.download.bind( this ) )
 		document.getElementById('colorSwap').addEventListener( 'mousedown', this.swapColor.bind( this ) )
 		this.currentColor = null
@@ -65,7 +68,13 @@ class Simulator{
 	}
 
 	download( ){
-		
+		this.targetZoom = 40
+		this.camera.position.set( -20, 12, 20 )
+		this.camera.lookAt( new Vector3( 0, 0, 0 ) )
+		this.formbox.toggle()
+	}
+
+	sendForm( ){
 		var doc = new jsPDF({
 			orientation: 'portrait',
 			unit: 'mm'
@@ -348,7 +357,7 @@ class Simulator{
 		this.camera.zoom = this.targetZoom
 		this.camera.position.set( -20, 12, 20 )
 		this.camera.lookAt( new Vector3( 0, 0, 0 ) )
-		this.camera.updateProjectionMatrix( )
+		
 	}
 
 	step( time ){
